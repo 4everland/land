@@ -10,10 +10,11 @@ const deployFuc: DeployFunction = async (env: HardhatRuntimeEnvironment) => {
 	const from = await signers[0].getAddress()
 	const core = await deployments.get('LandCore')
 	const usdc = await deployments.get('MockUSDC')
+	const usdt = await deployments.get('MockUSDT')
 	const dai = await deployments.get('MockDAI')
 	const args = [
 		core.address,
-		[usdc.address, dai.address]
+		[usdc.address, usdt.address, dai.address]
 	]
 	await deploy('Land', {
 		from,
