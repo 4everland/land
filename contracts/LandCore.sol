@@ -5,78 +5,64 @@ pragma solidity 0.8.19;
 import "./interfaces/ILandCore.sol";
 
 contract LandCore is ILandCore {
-    address public owner;
-    address public pendingOwner;
-    uint256 public ownershipTransferDeadline;
+	address public owner;
+	address public pendingOwner;
+	uint256 public ownershipTransferDeadline;
 
-    address public guardian;
+	address public guardian;
 
-    uint256 public constant OWNERSHIP_TRANSFER_DELAY = 86400 * 3;
+	uint256 public constant OWNERSHIP_TRANSFER_DELAY = 86400 * 3;
 
-    bool public paused;
+	bool public paused;
 
-    constructor(address _owner, address _guardian) {
-        owner = _owner;
-        guardian = _guardian;
-        emit GuardianSet(_guardian);
-    }
+	constructor(address _owner, address _guardian) {
+		owner = _owner;
+		guardian = _guardian;
+		emit GuardianSet(_guardian);
+	}
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Only owner");
-        _;
-    }
+	modifier onlyOwner() {
+		require(msg.sender == owner, "Only owner");
+		_;
+	}
 
-    /**
-     * @notice Set the guardian address
-               The guardian can execute some emergency actions
-     * @param _guardian Guardian address
-     */
-    function setGuardian(address _guardian) external onlyOwner {
-        guardian = _guardian;
-        emit GuardianSet(_guardian);
-    }
+	function setGuardian(address _guardian) external onlyOwner {
+		guardian = _guardian;
+		emit GuardianSet(_guardian);
+	}
 
-    /**
-     * @notice Sets the global pause state of the protocol
-     *         Pausing is used to mitigate risks in exceptional circumstances
-     *         Functionalities affected by pausing are:
-     *         - New borrowing is not possible
-     *         - New collateral deposits are not possible
-     *         - New stability pool deposits are not possible
-     * @param _paused If true the protocol is paused
-     */
-    function setPaused(bool _paused) external {
-        require((_paused && msg.sender == guardian) || msg.sender == owner, "Unauthorized");
-        paused = _paused;
-        if (_paused) {
-            emit Paused();
-        } else {
-            emit Unpaused();
-        }
-    }
+	function setPaused(bool _paused) external {
+		require((_paused && msg.sender == guardian) || msg.sender == owner, "Unauthorized");
+		paused = _paused;
+		if (_paused) {
+			emit Paused();
+		} else {
+			emit Unpaused();
+		}
+	}
 
-    function commitTransferOwnership(address newOwner) external onlyOwner {
-        pendingOwner = newOwner;
-        ownershipTransferDeadline = block.timestamp + OWNERSHIP_TRANSFER_DELAY;
+	function commitTransferOwnership(address newOwner) external onlyOwner {
+		pendingOwner = newOwner;
+		ownershipTransferDeadline = block.timestamp + OWNERSHIP_TRANSFER_DELAY;
 
-        emit NewOwnerCommitted(msg.sender, newOwner, block.timestamp + OWNERSHIP_TRANSFER_DELAY);
-    }
+		emit NewOwnerCommitted(msg.sender, newOwner, block.timestamp + OWNERSHIP_TRANSFER_DELAY);
+	}
 
-    function acceptTransferOwnership() external {
-        require(msg.sender == pendingOwner, "Only new owner");
-        require(block.timestamp >= ownershipTransferDeadline, "Deadline not passed");
+	function acceptTransferOwnership() external {
+		require(msg.sender == pendingOwner, "Only new owner");
+		require(block.timestamp >= ownershipTransferDeadline, "Deadline not passed");
 
-        emit NewOwnerAccepted(owner, msg.sender);
+		emit NewOwnerAccepted(owner, msg.sender);
 
-        owner = pendingOwner;
-        pendingOwner = address(0);
-        ownershipTransferDeadline = 0;
-    }
+		owner = pendingOwner;
+		pendingOwner = address(0);
+		ownershipTransferDeadline = 0;
+	}
 
-    function revokeTransferOwnership() external onlyOwner {
-        emit NewOwnerRevoked(msg.sender, pendingOwner);
+	function revokeTransferOwnership() external onlyOwner {
+		emit NewOwnerRevoked(msg.sender, pendingOwner);
 
-        pendingOwner = address(0);
-        ownershipTransferDeadline = 0;
-    }
+		pendingOwner = address(0);
+		ownershipTransferDeadline = 0;
+	}
 }
