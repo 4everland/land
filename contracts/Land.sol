@@ -4,15 +4,15 @@ pragma solidity 0.8.19;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableMapUpgradeable.sol";
+import "@openzeppelin/contracts/utils/structs/EnumerableMap.sol";
 import "./dependencies/LandOwnableUpgradeable.sol";
 import "./interfaces/ILand.sol";
 
 contract Land is ILand, LandOwnableUpgradeable {
-	using EnumerableMapUpgradeable for EnumerableMapUpgradeable.AddressToUintMap;
+	using EnumerableMap for EnumerableMap.AddressToUintMap;
 	uint64 public constant coinPerLand = 1e6;
 	uint8 public constant targetPriceDecimals = 18;
-	EnumerableMapUpgradeable.AddressToUintMap internal coins;
+	EnumerableMap.AddressToUintMap internal coins;
 	mapping(bytes32 => uint256) internal balances;
 	mapping(bytes32 => mapping(ICoin => uint256)) public balancesForCoin;
 	bool public paused;
@@ -37,7 +37,7 @@ contract Land is ILand, LandOwnableUpgradeable {
 		uint256 landAmount = coinAmount * coinPerLand;
 		balances[to] += landAmount;
 		balancesForCoin[to][coin] += landAmount;
-		emit Mint(coin, amount, coinAmount, landAmount);
+		emit Mint(to, coin, amount, coinAmount, landAmount);
 	}
 
 	function addCoin(ICoin coin) external onlyGuardian {

@@ -11,7 +11,7 @@ interface ILand {
 
 	event WithdrawnCoin(ICoin coin, address to, uint256 amount);
 
-	event Mint(ICoin coin, uint256 value, uint256 coinAmount, uint256 landAmount);
+	event Mint(bytes32 to, ICoin coin, uint256 value, uint256 coinAmount, uint256 landAmount);
 
 	function addCoin(ICoin coin) external;
 

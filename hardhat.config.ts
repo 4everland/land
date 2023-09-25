@@ -119,7 +119,7 @@ const config = {
 			gas: 'auto',
 			gasPrice: 'auto',
 			gasMultiplier: 1.3,
-			timeout: 100000
+			timeout: 100000,
 		}
 	},
 	etherscan: {
