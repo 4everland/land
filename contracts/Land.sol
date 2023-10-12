@@ -2,8 +2,6 @@
 
 pragma solidity 0.8.19;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableMap.sol";
 import "./dependencies/LandOwnableUpgradeable.sol";
 import "./interfaces/ILand.sol";
@@ -14,7 +12,7 @@ contract Land is ILand, LandOwnableUpgradeable {
 	uint8 public constant targetPriceDecimals = 18;
 	EnumerableMap.AddressToUintMap internal coins;
 	mapping(bytes32 => uint256) internal balances;
-	mapping(bytes32 => mapping(ICoin => uint256)) public balancesForCoin;
+	mapping(bytes32 => mapping(ICoin => uint256)) public deposits;
 	bool public paused;
 
 	modifier onlyGuardian() {
@@ -29,15 +27,15 @@ contract Land is ILand, LandOwnableUpgradeable {
 		}
 	}
 
-	function mint(ICoin coin, bytes32 to, uint256 amount) external {
+	function mint(ICoin coin, bytes32 account, uint256 amount) external {
 		require(!paused, "Land: paused");
 		require(coinExists(coin), "Land: nonexistent coin");
 		coin.transferFrom(msg.sender, address(this), amount);
 		uint256 coinAmount = formatValue(coin, amount);
 		uint256 landAmount = coinAmount * coinPerLand;
-		balances[to] += landAmount;
-		balancesForCoin[to][coin] += landAmount;
-		emit Mint(to, coin, amount, coinAmount, landAmount);
+		balances[account] += landAmount;
+		deposits[account][coin] += amount;
+		emit Mint(account, coin, amount, coinAmount, landAmount);
 	}
 
 	function addCoin(ICoin coin) external onlyGuardian {

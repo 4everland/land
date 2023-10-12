@@ -11,7 +11,7 @@ interface ILand {
 
 	event WithdrawnCoin(ICoin coin, address to, uint256 amount);
 
-	event Mint(bytes32 to, ICoin coin, uint256 value, uint256 coinAmount, uint256 landAmount);
+	event Mint(bytes32 account, ICoin coin, uint256 value, uint256 coinAmount, uint256 landAmount);
 
 	function addCoin(ICoin coin) external;
 
@@ -19,7 +19,7 @@ interface ILand {
 
 	function decimalsOf(ICoin coin) external view returns(uint8);
 
-	function balanceOf(bytes32 to) external view returns(uint256);
+	function balanceOf(bytes32 account) external view returns(uint256);
 
 	function formatValue(ICoin coin, uint256 amount) external view returns(uint256);
 
