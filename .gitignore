@@ -2,7 +2,7 @@
 cache/
 artifacts/
 exports/
-# deploy/
+deploy/
 deployments/localhost
 docs/
 coverage*
