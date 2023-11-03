@@ -8,7 +8,7 @@ import "./interfaces/ILand.sol";
 
 contract Land is ILand, LandOwnableUpgradeable {
 	using EnumerableMap for EnumerableMap.AddressToUintMap;
-	uint64 public constant coinPerLand = 1e6;
+	uint64 public constant landPerCoin = 1e6;
 	uint8 public constant targetPriceDecimals = 18;
 	EnumerableMap.AddressToUintMap internal coins;
 	mapping(bytes32 => uint256) internal balances;
@@ -32,10 +32,10 @@ contract Land is ILand, LandOwnableUpgradeable {
 		require(coinExists(coin), "Land: nonexistent coin");
 		coin.transferFrom(msg.sender, address(this), amount);
 		uint256 coinAmount = formatValue(coin, amount);
-		uint256 landAmount = coinAmount * coinPerLand;
+		uint256 landAmount = coinAmount * landPerCoin;
 		balances[account] += landAmount;
 		deposits[account][coin] += amount;
-		emit Mint(account, coin, amount, coinAmount, landAmount);
+		emit Mint(account, coin, amount, coinAmount, landAmount, balances[account]);
 	}
 
 	function addCoin(ICoin coin) external onlyGuardian {
