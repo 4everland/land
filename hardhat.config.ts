@@ -78,23 +78,71 @@ const config = {
 				interval: 2000
 			}
 		},
+		arbitrum: {
+			url: 'https://arbitrum-one.publicnode.com',
+			accounts,
+			chainId: 42161
+		},
+		'arbitrum-testnet': {
+			url: 'https://stylus-testnet.arbitrum.io/rpc',
+			accounts,
+			chainId: 23011913
+		},
+		'polygon-zk': {
+			url: 'https://polygon-zkevm.blockpi.network/v1/rpc/public',
+			accounts,
+			chainId: 1101
+		},
+		'polygon-zk-testnet': {
+			url: 'https://rpc.public.zkevm-test.net',
+			accounts,
+			chainId: 1442
+		},
+		'opbnb-testnet': {
+			url: 'https://opbnb-testnet-rpc.bnbchain.org',
+			accounts,
+			chainId: 5611,
+		},
+		'opbnb-mainnet': {
+			url: 'https://opbnb-mainnet-rpc.bnbchain.org',
+			accounts,
+			chainId: 204,
+		},
+		// depreacated
+		// 'opbnb-testnet-pro': {
+		// 	url: 'https://opbnb-testnet-rpc.bnbchain.org',
+		// 	accounts,
+		// 	chainId: 5611,
+		// },
+		'linea-testnet': {
+			url: 'https://rpc.goerli.linea.build',
+			accounts,
+			chainId: 59140,
+		},
+		'linea': {
+			url: 'https://linea-mainnet.infura.io/v3/b60fe281bce9412991978d81b951b4ec',
+			accounts,
+			chainId: 59144,
+		},
 		bsc: {
-			url: 'https://rpc.ankr.com/bsc',
+			url: 'https://binance.nodereal.io',
 			accounts,
 			chainId: 56,
-			gas: 'auto',
-			gasPrice: 'auto',
-			gasMultiplier: 1.3,
-			timeout: 100000
 		},
 		chapel: {
-			url: 'https://bsctestapi.terminet.io/rpc',
+			url: 'https://endpoints.omniatech.io/v1/bsc/testnet/public',
 			accounts,
 			chainId: 97,
-			gas: 'auto',
-			gasPrice: 'auto',
-			gasMultiplier: 1.3,
-			timeout: 100000
+		},
+		'scroll-testnet': {
+			url: 'https://sepolia-rpc.scroll.io/',
+			accounts,
+			chainId: 534351
+		},
+		'scroll-mainnet': {
+			url: 'https://rpc.scroll.io/',
+			accounts,
+			chainId: 534352
 		},
 		goerli: {
 			url: 'https://rpc.goerli.eth.gateway.fm',
