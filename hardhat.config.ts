@@ -145,9 +145,18 @@ const config = {
 			chainId: 534352
 		},
 		goerli: {
-			url: 'https://rpc.goerli.eth.gateway.fm',
+			url: 'https://eth-goerli.api.onfinality.io/public',
 			accounts,
 			chainId: 5,
+			gas: 'auto',
+			gasPrice: 'auto',
+			gasMultiplier: 1.3,
+			timeout: 100000
+		},
+		sepolia: {
+			url:'https://endpoints.omniatech.io/v1/eth/sepolia/public',
+			accounts,
+			chainId: 11155111,
 			gas: 'auto',
 			gasPrice: 'auto',
 			gasMultiplier: 1.3,
