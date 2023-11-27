@@ -78,7 +78,12 @@ const config = {
 				interval: 2000
 			}
 		},
-		arbitrum: {
+		'arbitrum-nova': {
+			url: 'https://arbitrum-nova.publicnode.com',
+			accounts,
+			chainId: 42170
+		},
+		'arbitrum-one': {
 			url: 'https://arbitrum-one.publicnode.com',
 			accounts,
 			chainId: 42161
@@ -119,7 +124,7 @@ const config = {
 			accounts,
 			chainId: 59140,
 		},
-		'linea': {
+		linea: {
 			url: 'https://linea-mainnet.infura.io/v3/b60fe281bce9412991978d81b951b4ec',
 			accounts,
 			chainId: 59144,
@@ -163,7 +168,7 @@ const config = {
 			timeout: 100000
 		},
 		polygon: {
-			url: 'https://rpc-mainnet.matic.network',
+			url: 'https://polygon-pokt.nodies.app',
 			accounts,
 			gas: 'auto',
 			gasPrice: 'auto',
@@ -182,6 +187,11 @@ const config = {
 	etherscan: {
 		apiKey: {
 			mainnet: process.env.APIKEY_MAINNET!,
+			arbitrum: process.env.APIKEY_ARBONE,
+			arbitrumOne: process.env.APIKEY_ARBONE!,
+			arbitrumNova: process.env.APIKEY_ARBNOVA!,
+			linea: process.env.APIKEY_LINEA,
+			sepolia: process.env.APIKEY_MAINNET!,
 			bsc:  process.env.APIKEY_BSC!,
 			polygon: process.env.APIKEY_POLYGON!,
 			goerli: process.env.APIKEY_GOERLI!,
