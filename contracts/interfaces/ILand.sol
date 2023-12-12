@@ -13,6 +13,8 @@ interface ILand {
 
 	event Mint(bytes32 account, ICoin coin, uint256 value, uint256 coinAmount, uint256 landAmount, uint256 totalLandAmount);
 
+	function mint(ICoin coin, bytes32 account, uint256 amount) external;
+
 	function addCoin(ICoin coin) external;
 
 	function coinExists(ICoin coin) external view returns(bool);

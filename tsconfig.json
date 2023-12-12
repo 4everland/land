@@ -20,7 +20,7 @@
 	"include": [
 		"hardhat.config.ts",
 		"./deploy",
-		"./test",
+		"tests",
 		"./tasks",
 		"./types"
 	],

@@ -18,6 +18,9 @@ dotenvConfig({ path: resolve(__dirname, dotenvConfigPath) })
 const accounts = {
 	mnemonic: process.env.MNEMONIC || 'test test test test test test test test test test test test',
 }
+if (process.env.NODE_ENV != 'build') {
+	require('./tasks')
+}
 
 const config = {
 	solidity: {
@@ -204,7 +207,7 @@ const config = {
 		artifacts: 'artifacts',
 		cache: 'cache',
 		sources: 'contracts',
-		tests: 'test'
+		tests: 'tests'
 	},
 	gasReporter: {
 		currency: 'USD',

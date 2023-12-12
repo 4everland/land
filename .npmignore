@@ -1,0 +1,7 @@
+contracts/
+hbs/
+deployments/
+hardhat.config.ts
+tasks/
+tests/
+!types/
