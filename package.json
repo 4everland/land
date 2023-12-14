@@ -50,8 +50,7 @@
 		"solhint-plugin-prettier": "^0.0.5",
 		"solidity-coverage": "^0.8.3",
 		"typechain": "^8.2.0",
-		"typescript": "^5.1.6",
-		"usingtellor": "^5.0.4"
+		"typescript": "^5.1.6"
 	},
 	"scripts": {
 		"prepublish": "npm run build && tsc ./types/**.ts --moduleResolution nodenext --target ESNext",

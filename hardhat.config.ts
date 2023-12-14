@@ -69,6 +69,7 @@ const config = {
 		hardhat: {
 			forking: {
 				enabled: true,
+				blockNumber: 113463904,
 				url: process.env.MAINNET
 			},
 			accounts,
@@ -185,6 +186,22 @@ const config = {
 			gasPrice: 'auto',
 			gasMultiplier: 1.3,
 			timeout: 100000,
+		},
+		'optimism-dev': {
+			url: 'https://optimism.llamarpc.com',
+			accounts,
+			gas: 'auto',
+			gasPrice: 'auto',
+			gasMultiplier: 1.3,
+			timeout: 100000
+		},
+		'optimism-pro': {
+			url: 'https://optimism.llamarpc.com',
+			accounts,
+			gas: 'auto',
+			gasPrice: 'auto',
+			gasMultiplier: 1.3,
+			timeout: 100000
 		}
 	},
 	etherscan: {
