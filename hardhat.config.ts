@@ -216,7 +216,8 @@ const config = {
 			polygon: process.env.APIKEY_POLYGON!,
 			goerli: process.env.APIKEY_GOERLI!,
 			bscTestnet: process.env.APIKEY_CHAPEL!,
-			polygonMumbai: process.env.APIKEY_MUMBAI!
+			polygonMumbai: process.env.APIKEY_MUMBAI!,
+			optimisticEthereum: process.env.APIKEY_OP!,
 		}
 	},
 	paths: {
