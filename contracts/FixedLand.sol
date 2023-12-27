@@ -21,7 +21,7 @@ contract FixedLand is Land, AdminWrapper {
 	function mintByETH(bytes32 account) external payable {
 		require(!paused, "FixedLand: paused");
 		ICoin WETH = ICoin(0x5300000000000000000000000000000000000004);
-		uint256 value = 2200e18 * msg.value / 1e18;
+		uint256 value = 2300e18 * msg.value / 1e18;
 		uint256 coinAmount = formatValue(value, 18);
 		uint256 landAmount = coinAmount * landPerCoin;
 		balances[account] += landAmount;
