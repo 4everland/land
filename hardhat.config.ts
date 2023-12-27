@@ -67,11 +67,11 @@ const config = {
 			timeout: 100000
 		},
 		hardhat: {
-			forking: {
-				enabled: true,
-				blockNumber: 113463904,
-				url: process.env.MAINNET
-			},
+			// forking: {
+			// 	enabled: true,
+			// 	blockNumber: 113463904,
+			// 	url: process.env.MAINNET
+			// },
 			accounts,
 			gas: 'auto',
 			gasPrice: 'auto',
@@ -199,6 +199,15 @@ const config = {
 			url: 'https://optimism.llamarpc.com',
 			accounts,
 			gas: 'auto',
+			gasPrice: 'auto',
+			gasMultiplier: 1.3,
+			timeout: 100000
+		},
+		'scroll': {
+			url: 'https://rpc.ankr.com/scroll',
+			accounts,
+			gas: 'auto',
+			chainId: 534352,
 			gasPrice: 'auto',
 			gasMultiplier: 1.3,
 			timeout: 100000
