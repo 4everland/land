@@ -117,12 +117,6 @@ const config = {
 			accounts,
 			chainId: 204,
 		},
-		// depreacated
-		// 'opbnb-testnet-pro': {
-		// 	url: 'https://opbnb-testnet-rpc.bnbchain.org',
-		// 	accounts,
-		// 	chainId: 5611,
-		// },
 		'linea-testnet': {
 			url: 'https://rpc.goerli.linea.build',
 			accounts,
@@ -204,7 +198,16 @@ const config = {
 			timeout: 100000
 		},
 		'scroll': {
-			url: 'https://rpc.ankr.com/scroll',
+			url: 'https://scroll.rpc.thirdweb.com',
+			accounts,
+			gas: 'auto',
+			chainId: 534352,
+			gasPrice: 'auto',
+			gasMultiplier: 1.3,
+			timeout: 100000
+		},
+		'scroll-pro': {
+			url: 'https://scroll.rpc.thirdweb.com',
 			accounts,
 			gas: 'auto',
 			chainId: 534352,
