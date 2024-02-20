@@ -142,11 +142,6 @@ const config = {
 			accounts,
 			chainId: 534351
 		},
-		'scroll-mainnet': {
-			url: 'https://rpc.scroll.io/',
-			accounts,
-			chainId: 534352
-		},
 		goerli: {
 			url: 'https://eth-goerli.api.onfinality.io/public',
 			accounts,
@@ -166,7 +161,7 @@ const config = {
 			timeout: 100000
 		},
 		polygon: {
-			url: 'https://polygon-pokt.nodies.app',
+			url: 'https://polygon-bor.publicnode.com',
 			accounts,
 			gas: 'auto',
 			gasPrice: 'auto',
@@ -190,7 +185,7 @@ const config = {
 			timeout: 100000
 		},
 		'optimism-pro': {
-			url: 'https://optimism.llamarpc.com',
+			url: 'https://opt-mainnet.g.alchemy.com/v2/uwFroxk2OBoMpOSrmkuHAOcl1Z_1HQy_',
 			accounts,
 			gas: 'auto',
 			gasPrice: 'auto',
@@ -214,6 +209,11 @@ const config = {
 			gasPrice: 'auto',
 			gasMultiplier: 1.3,
 			timeout: 100000
+		},
+		'zksync-era': {
+			url: 'https://mainnet.era.zksync.io',
+			chainId: 324,
+			accounts
 		}
 	},
 	etherscan: {
