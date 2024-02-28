@@ -31,7 +31,7 @@ contract Land is ILand, LandOwnableUpgradeable {
 		emit Mint(account, coin, amount, coinAmount, landAmount, balances[account]);
 	}
 
-	function addCoin(ICoin coin) external onlyGuardian {
+	function addCoin(ICoin coin) external onlyOwner {
 		_addCoin(coin);
 	}
 
@@ -42,7 +42,7 @@ contract Land is ILand, LandOwnableUpgradeable {
 		emit AddCoin(coin);
 	}
 
-	function removeCoin(ICoin coin) external onlyGuardian {
+	function removeCoin(ICoin coin) external onlyOwner {
 		_removeCoin(coin);
 	}
 
