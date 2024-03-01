@@ -3,5 +3,5 @@
 pragma solidity 0.8.19;
 
 interface IPriceFeed {
-	function fetchPrice() external returns (uint256);
+	function fetchPrice(address _token) external returns (uint256);
 }

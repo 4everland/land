@@ -17,7 +17,7 @@ contract LandOwnable {
 	}
 
 	function owner() public view returns (address) {
-		return 0x539A995045aB8ED770b89b9f175Cb6bc9075B154;
+		return 0x6A83420c1395608cA5DAc372FB40145F2FFc08a3;
 	}
 
 	function guardian() public view returns (address) {

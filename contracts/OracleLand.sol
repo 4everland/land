@@ -10,18 +10,14 @@ import "./dependencies/console.sol";
 contract OracleLand is Land, AdminWrapper {
 	IPriceFeed public priceFeed;
 
-	function initialize(ILandCore _core, IPriceFeed _priceFeed, ICoin[] memory _coins) external initializer {
-		__InitCore(_core);
+	function __Init_Price_Feed(IPriceFeed _priceFeed) internal {
 		priceFeed = _priceFeed;
-		for (uint256 i = 0; i < _coins.length; i++) {
-			_addCoin(_coins[i]);
-		}
 	}
 
 	function mintByETH(bytes32 account) external payable {
 		require(!paused, "OracleLand: paused");
 		ICoin eth = ICoin(address(0));
-		uint256 price = priceFeed.fetchPrice();
+		uint256 price = fetchPrice();
 		uint256 coinAmount = msg.value * price / 1e18;
 		uint256 landAmount = coinAmount * landPerCoin;
 		balances[account] += landAmount;
@@ -29,11 +25,11 @@ contract OracleLand is Land, AdminWrapper {
 		emit Mint(account, eth, msg.value, coinAmount, landAmount, balances[account]);
 	}
 
-	function setPriceFeed(IPriceFeed _priceFeed) external onlyOwner {
-		priceFeed = _priceFeed;
+	function fetchPrice() public returns(uint256) {
+		return priceFeed.fetchPrice(address(0));
 	}
 
-	function upgradeWith(IPriceFeed _priceFeed) external onlyAdmin {
+	function setPriceFeed(IPriceFeed _priceFeed) external onlyOwner {
 		priceFeed = _priceFeed;
 	}
 

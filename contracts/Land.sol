@@ -20,6 +20,12 @@ contract Land is ILand, LandOwnableUpgradeable {
 		_;
 	}
 
+	function __Init_Coins(ICoin[] memory _coins) internal {
+		for (uint64 i = 0; i < _coins.length; i++) {
+			_addCoin(_coins[i]);
+		}
+	}
+
 	function mint(ICoin coin, bytes32 account, uint256 amount) external {
 		require(!paused, "Land: paused");
 		require(coinExists(coin), "Land: nonexistent coin");
