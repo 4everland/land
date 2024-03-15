@@ -10,6 +10,7 @@ import "../dependencies/console.sol";
 contract PythPriceFeed is LandOwnable {
 	struct OracleRecord {
 		IPyth pyth;
+		bytes32 feed;
 		uint32 decimals;
 		uint32 heartbeat;
 	}
@@ -39,7 +40,7 @@ contract PythPriceFeed is LandOwnable {
 
 	// Events ---------------------------------------------------------------------------------------------------------
 
-	event NewOracleRegistered(address token, address pyth);
+	event NewOracleRegistered(address token, address pyth, bytes32 feed);
 	event PriceFeedStatusUpdated(address token, address oracle, bool isWorking);
 	event PriceRecordUpdated(address indexed token, uint256 _price);
 
@@ -50,40 +51,29 @@ contract PythPriceFeed is LandOwnable {
 	// Responses are considered stale this many seconds after the oracle's heartbeat
 	uint256 public constant RESPONSE_TIMEOUT_BUFFER = 0 hours;
 
-	bytes32 public constant ETHUSDFEED = 0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace;
-
 	// State ------------------------------------------------------------------------------------------------------------
 	mapping(address => OracleRecord) public oracleRecords;
 	mapping(address => PriceRecord) public priceRecords;
 
-	constructor(ILandCore _core) LandOwnable(_core) {}
+	constructor(ILandCore _core, address _token, address _pyth, bytes32 _feed, uint32 _heartbeat) LandOwnable(_core) {
+		_setOracle(_token, _pyth, _feed, _heartbeat);
+	}
 
-	// Admin routines ---------------------------------------------------------------------------------------------------
+	function setOracle(address _token, address _pyth, bytes32 _feed, uint32 _heartbeat) external onlyGuardian {
+		_setOracle(_token, _pyth, _feed, _heartbeat);
+	}
 
-	/**
-        @notice Set the oracle for a specific token
-        @param _token Address of the LST to set the oracle for
-        @param _pyth Address of the pyth oracle for this LST
-        @param _heartbeat Oracle heartbeat, in seconds
-     */
-	function setOracle(address _token, address _pyth, uint32 _heartbeat) public onlyOwner {
+	function _setOracle(address _token, address _pyth, bytes32 _feed, uint32 _heartbeat) internal {
 		if (_heartbeat > 86400) revert PriceFeed__HeartbeatOutOfBoundsError();
 		IPyth newFeed = IPyth(_pyth);
-		FeedResponse memory currResponse = _fetchFeedResponses(newFeed);
-		OracleRecord memory record = OracleRecord({ pyth: newFeed, decimals: uint32(-currResponse.expo), heartbeat: _heartbeat});
+		FeedResponse memory currResponse = _fetchFeedResponses(newFeed, _feed);
+		OracleRecord memory record = OracleRecord({ pyth: newFeed, feed: _feed, decimals: uint32(-currResponse.expo), heartbeat: _heartbeat});
 		oracleRecords[_token] = record;
 
 		_processFeedResponses(_token, record, currResponse);
-		emit NewOracleRegistered(_token, _pyth);
+		emit NewOracleRegistered(_token, _pyth, _feed);
 	}
 
-	/**
-        @notice Get the latest price returned from the oracle
-        @dev You can obtain these values by calling `TroveManager.fetchPrice()`
-             rather than directly interacting with this contract.
-        @param _token Token to fetch the price for
-        @return The latest valid price for the requested token
-     */
 	function fetchPrice(address _token) public returns (uint256) {
 		PriceRecord memory priceRecord = priceRecords[_token];
 		if (priceRecord.lastUpdated == block.timestamp) {
@@ -92,11 +82,9 @@ contract PythPriceFeed is LandOwnable {
 		}
 
 		OracleRecord storage oracle = oracleRecords[_token];
-		FeedResponse memory currResponse = _fetchFeedResponses(oracle.pyth);
+		FeedResponse memory currResponse = _fetchFeedResponses(oracle.pyth, oracle.feed);
 		return _processFeedResponses(_token, oracle, currResponse);
 	}
-
-	// Internal functions -----------------------------------------------------------------------------------------------
 
 	function _processFeedResponses(address _token, OracleRecord memory oracle, FeedResponse memory _currResponse) internal returns (uint256) {
 		if (!_isFeedWorking(_currResponse)) {
@@ -111,8 +99,8 @@ contract PythPriceFeed is LandOwnable {
 		return scaledPrice;
 	}
 
-	function _fetchFeedResponses(IPyth oracle) internal view returns (FeedResponse memory currResponse) {
-		currResponse = _fetchCurrentFeedResponse(oracle);
+	function _fetchFeedResponses(IPyth oracle, bytes32 feed) internal view returns (FeedResponse memory currResponse) {
+		currResponse = _fetchCurrentFeedResponse(oracle, feed);
 	}
 
 	function _isPriceStale(uint256 _priceTimestamp, uint256 _heartbeat) internal view returns (bool) {
@@ -144,8 +132,8 @@ contract PythPriceFeed is LandOwnable {
 		emit PriceRecordUpdated(_token, _price);
 	}
 
-	function _fetchCurrentFeedResponse(IPyth _priceAggregator) internal view returns (FeedResponse memory response) {
-		try _priceAggregator.getPriceUnsafe(ETHUSDFEED) returns (IPyth.Price memory price) {
+	function _fetchCurrentFeedResponse(IPyth _priceAggregator, bytes32 _feed) internal view returns (FeedResponse memory response) {
+		try _priceAggregator.getPriceUnsafe(_feed) returns (IPyth.Price memory price) {
 			response.price = price.price;
 			response.conf = price.conf;
 			response.expo = price.expo;

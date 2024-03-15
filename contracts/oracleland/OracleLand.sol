@@ -2,20 +2,26 @@
 
 pragma solidity 0.8.19;
 
-import "./Land.sol";
-import "./interfaces/IPriceFeed.sol";
-import "./proxy/AdminWrapper.sol";
-import "./dependencies/console.sol";
+import "@openzeppelin/contracts/utils/structs/EnumerableMap.sol";
+import "../core/Land.sol";
+import "../interfaces/IPriceFeed.sol";
 
-contract OracleLand is Land, AdminWrapper {
+contract OracleLand is Land {
 	IPriceFeed public priceFeed;
+
+	function initialize(ILandCore _core, IPriceFeed _priceFeed, ICoin[] memory _coins) external initializer {
+		__InitCore(_core);
+		__Init_Price_Feed(_priceFeed);
+		__Init_Coins(_coins);
+	}
 
 	function __Init_Price_Feed(IPriceFeed _priceFeed) internal {
 		priceFeed = _priceFeed;
+		// check feed is working
+		fetchPrice();
 	}
 
-	function mintByETH(bytes32 account) external payable {
-		require(!paused, "OracleLand: paused");
+	function mintByETH(bytes32 account) external payable whenNotPaused {
 		ICoin eth = ICoin(address(0));
 		uint256 price = fetchPrice();
 		uint256 coinAmount = msg.value * price / 1e18;
@@ -32,5 +38,4 @@ contract OracleLand is Land, AdminWrapper {
 	function setPriceFeed(IPriceFeed _priceFeed) external onlyOwner {
 		priceFeed = _priceFeed;
 	}
-
 }

@@ -3,8 +3,8 @@
 pragma solidity 0.8.19;
 
 import "./OracleLand.sol";
-import "./interfaces/IBlast.sol";
-import "./dependencies/console.sol";
+import "../interfaces/IBlast.sol";
+import "../dependencies/console.sol";
 
 contract BlastOracleLand is OracleLand {
 	IBlast public blast;

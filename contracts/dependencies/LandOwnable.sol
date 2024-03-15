@@ -16,8 +16,22 @@ contract LandOwnable {
 		_;
 	}
 
+	modifier onlyGuardian() {
+		require(msg.sender == guardian(), "Only guardian");
+		_;
+	}
+
+	modifier whenNotPaused() {
+	    require(!paused(), "paused");
+		_;
+	}
+
+	function paused() public view returns (bool) {
+		return LandCore.paused();
+	}
+
 	function owner() public view returns (address) {
-		return 0x6A83420c1395608cA5DAc372FB40145F2FFc08a3;
+		return LandCore.owner();
 	}
 
 	function guardian() public view returns (address) {

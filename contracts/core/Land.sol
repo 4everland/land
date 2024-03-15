@@ -3,8 +3,8 @@
 pragma solidity 0.8.19;
 
 import "@openzeppelin/contracts/utils/structs/EnumerableMap.sol";
-import "./dependencies/LandOwnableUpgradeable.sol";
-import "./interfaces/ILand.sol";
+import "../dependencies/LandOwnableUpgradeable.sol";
+import "../interfaces/ILand.sol";
 
 contract Land is ILand, LandOwnableUpgradeable {
 	using EnumerableMap for EnumerableMap.AddressToUintMap;
@@ -13,12 +13,6 @@ contract Land is ILand, LandOwnableUpgradeable {
 	EnumerableMap.AddressToUintMap internal coins;
 	mapping(bytes32 => uint256) internal balances;
 	mapping(bytes32 => mapping(ICoin => uint256)) public deposits;
-	bool public paused;
-
-	modifier onlyGuardian() {
-		require(msg.sender == guardian(), "Land: Caller is not guardian");
-		_;
-	}
 
 	function __Init_Coins(ICoin[] memory _coins) internal {
 		for (uint64 i = 0; i < _coins.length; i++) {
@@ -26,8 +20,7 @@ contract Land is ILand, LandOwnableUpgradeable {
 		}
 	}
 
-	function mint(ICoin coin, bytes32 account, uint256 amount) external {
-		require(!paused, "Land: paused");
+	function mint(ICoin coin, bytes32 account, uint256 amount) external whenNotPaused {
 		require(coinExists(coin), "Land: nonexistent coin");
 		coin.transferFrom(msg.sender, address(this), amount);
 		uint256 coinAmount = formatValue(coin, amount);
@@ -37,7 +30,7 @@ contract Land is ILand, LandOwnableUpgradeable {
 		emit Mint(account, coin, amount, coinAmount, landAmount, balances[account]);
 	}
 
-	function addCoin(ICoin coin) external onlyOwner {
+	function addCoin(ICoin coin) external onlyGuardian {
 		_addCoin(coin);
 	}
 
@@ -48,7 +41,7 @@ contract Land is ILand, LandOwnableUpgradeable {
 		emit AddCoin(coin);
 	}
 
-	function removeCoin(ICoin coin) external onlyOwner {
+	function removeCoin(ICoin coin) external onlyGuardian {
 		_removeCoin(coin);
 	}
 
@@ -86,10 +79,6 @@ contract Land is ILand, LandOwnableUpgradeable {
 			return amount / (10 ** (targetPriceDecimals - decimals));
 		}
 		return amount;
-	}
-
-	function setPaused(bool _paused) external onlyOwner {
-		paused = _paused;
 	}
 
 	function withdraw(ICoin coin, address to, uint256 amount) external onlyOwner {
