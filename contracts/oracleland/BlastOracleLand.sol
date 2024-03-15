@@ -10,7 +10,7 @@ contract BlastOracleLand is OracleLand {
 	IBlast public blast;
 	IERC20Rebasing public USDB;
 
-	function initialize(ILandCore _core, IBlast _blast, IERC20Rebasing _USDB, IPriceFeed _feed) external initializer {
+	function constructor_(ILandCore _core, IBlast _blast, IERC20Rebasing _USDB, IPriceFeed _feed) external initializer {
 		__InitCore(_core);
 		__Init_Blast(_blast, _USDB);
 		__Init_Price_Feed(_feed);

@@ -64,7 +64,8 @@ contract PythPriceFeed is LandOwnable {
 	}
 
 	function _setOracle(address _token, address _pyth, bytes32 _feed, uint32 _heartbeat) internal {
-		if (_heartbeat > 86400) revert PriceFeed__HeartbeatOutOfBoundsError();
+		// currently never check heart beat
+		// if (_heartbeat > 86400) revert PriceFeed__HeartbeatOutOfBoundsError();
 		IPyth newFeed = IPyth(_pyth);
 		FeedResponse memory currResponse = _fetchFeedResponses(newFeed, _feed);
 		OracleRecord memory record = OracleRecord({ pyth: newFeed, feed: _feed, decimals: uint32(-currResponse.expo), heartbeat: _heartbeat});
@@ -90,9 +91,9 @@ contract PythPriceFeed is LandOwnable {
 		if (!_isFeedWorking(_currResponse)) {
 			revert PriceFeed__InvalidFeedResponseError(_token);
 		}
-		if (_isPriceStale(_currResponse.publishTime, oracle.heartbeat)) {
-			revert PriceFeed__FeedFrozenError(_token);
-		}
+		// if (_isPriceStale(_currResponse.publishTime, oracle.heartbeat)) {
+		// 	revert PriceFeed__FeedFrozenError(_token);
+		// }
 		uint32 decimals = oracle.decimals;
 		uint256 scaledPrice = _scalePriceByDigits(_currResponse.price, decimals);
 		_storePrice(_token, scaledPrice, _currResponse.publishTime);
