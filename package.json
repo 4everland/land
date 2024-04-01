@@ -53,8 +53,7 @@
 		"typescript": "^5.1.6"
 	},
 	"scripts": {
-		"prepublish": "npm run build && tsc ./types/
-		**.ts --module nodenext --moduleResolution nodenext --target ESNext",
+		"prepublish": "npm run build && tsc ./types/**.ts --module nodenext --moduleResolution nodenext --target ESNext",
 		"clean": "hardhat clean",
 		"build:zk:mainnet": "cross-env NODE_ENV=build hardhat compile --network zkSyncMainnet && cross-env NODE_ENV=build hardhat typechain",
 		"build": "cross-env NODE_ENV=build hardhat compile && cross-env NODE_ENV=build hardhat typechain",
