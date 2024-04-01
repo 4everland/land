@@ -137,7 +137,7 @@ const config = {
 			chainId: 5611,
 		},
 		'opbnb-mainnet': {
-			url: 'https://opbnb-mainnet-rpc.bnbchain.org',
+			url: 'https://opbnb-rpc.publicnode.com',
 			accounts,
 			chainId: 204,
 		},
