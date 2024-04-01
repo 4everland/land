@@ -8,6 +8,8 @@ import 'hardhat-gas-reporter'
 import 'solidity-coverage'
 import 'hardhat-storage-layout'
 import 'solidity-docgen'
+import '@matterlabs/hardhat-zksync-solc'
+import '@matterlabs/hardhat-zksync-deploy'
 
 import { config as dotenvConfig } from 'dotenv'
 import { resolve } from 'path'
@@ -23,6 +25,10 @@ if (process.env.NODE_ENV != 'build') {
 }
 
 const config = {
+	zksolc: {
+		version: '1.4.0', // Uses latest available in https://github.com/matter-labs/zksolc-bin/
+		settings: {},
+	},
 	solidity: {
 		overrides: {},
 		compilers: [
@@ -58,6 +64,20 @@ const config = {
 			gasMultiplier: 1.3,
 			timeout: 100000
 		},
+		sepolia: {
+			url: 'https://eth-sepolia.g.alchemy.com/v2/BozCNsg-XYuj_WXWdMcHHinrOSC7jQRI',  // The Ethereum Web3 RPC URL (optional).
+			zksync: false, // disables zksolc compiler
+		},
+		zkSyncTestnet: {
+			url: 'https://sepolia.era.zksync.dev', // The testnet RPC URL of zkSync Era network.
+			ethNetwork: 'sepolia', // The Ethereum Web3 RPC URL, or the identifier of the network (e.g. `mainnet` or `sepolia`)
+			zksync: true, // enables zksolc compiler
+		},
+		zkSyncMainnet: {
+			url: 'https://mainnet.era.zksync.io',
+			ethNetwork: 'mainnet',
+			zksync: true
+		},
 		localhost: {
 			url: 'http://127.0.0.1:8545',
 			accounts,
@@ -81,6 +101,10 @@ const config = {
 				auto: true,
 				interval: 2000
 			}
+		},
+		blast:{
+			url: 'https://blast.blockpi.network/v1/rpc/public',
+			accounts
 		},
 		'arbitrum-nova': {
 			url: 'https://arbitrum-nova.publicnode.com',
@@ -151,15 +175,6 @@ const config = {
 			gasMultiplier: 1.3,
 			timeout: 100000
 		},
-		sepolia: {
-			url:'https://endpoints.omniatech.io/v1/eth/sepolia/public',
-			accounts,
-			chainId: 11155111,
-			gas: 'auto',
-			gasPrice: 'auto',
-			gasMultiplier: 1.3,
-			timeout: 100000
-		},
 		polygon: {
 			url: 'https://polygon-bor.publicnode.com',
 			accounts,
@@ -198,8 +213,6 @@ const config = {
 			gas: 'auto',
 			chainId: 534352,
 			gasPrice: 'auto',
-			gasMultiplier: 1.3,
-			timeout: 100000
 		},
 		'scroll-pro': {
 			url: 'https://scroll.rpc.thirdweb.com',
@@ -214,7 +227,11 @@ const config = {
 			url: 'https://mainnet.era.zksync.io',
 			chainId: 324,
 			accounts
-		}
+		},
+		zkTestnet: {
+			url: 'https://testnet.era.zksync.dev',
+			accounts
+		},
 	},
 	etherscan: {
 		apiKey: {
