@@ -5,3 +5,9 @@ hardhat.config.ts
 tasks/
 tests/
 !types/
+.env
+artifacts/
+cache/
+artifacts-zk/
+cache-zk/
+
