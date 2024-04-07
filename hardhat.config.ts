@@ -214,6 +214,10 @@ const config = {
 			url: 'https://mainnet.era.zksync.io',
 			chainId: 324,
 			accounts
+		},
+		blast: {
+			url: 'https://blastl2-mainnet.public.blastapi.io/',
+			accounts
 		}
 	},
 	etherscan: {
