@@ -247,7 +247,19 @@ const config = {
 			bscTestnet: process.env.APIKEY_CHAPEL!,
 			polygonMumbai: process.env.APIKEY_MUMBAI!,
 			optimisticEthereum: process.env.APIKEY_OP!,
-		}
+			blast: process.env.APIKEY_BLAST!,
+			'opbnb-mainnet': process.env.APIKEY_MAINNET!,
+		},
+		customChains: [
+			{
+				network: 'blast',
+				chainId: 81457,
+				urls: {
+					apiURL: 'https://api.blastscan.io/api',
+					browserURL: 'https://blastscan.io'
+				}
+			}
+		]
 	},
 	paths: {
 		deploy: 'deploy',
