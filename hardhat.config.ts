@@ -59,8 +59,8 @@ const config = {
 		mainnet: {
 			url: process.env.MAINNET,
 			accounts,
-			gas:'auto',
-			gasPrice:'auto',
+			gas: 'auto',
+			gasPrice: 'auto',
 			gasMultiplier: 1.3,
 			timeout: 100000
 		},
@@ -102,7 +102,7 @@ const config = {
 				interval: 2000
 			}
 		},
-		blast:{
+		blast: {
 			url: 'https://blast.blockpi.network/v1/rpc/public',
 			accounts
 		},
@@ -241,14 +241,14 @@ const config = {
 			arbitrumNova: process.env.APIKEY_ARBNOVA!,
 			linea: process.env.APIKEY_LINEA,
 			sepolia: process.env.APIKEY_MAINNET!,
-			bsc:  process.env.APIKEY_BSC!,
+			bsc: process.env.APIKEY_BSC!,
 			polygon: process.env.APIKEY_POLYGON!,
 			goerli: process.env.APIKEY_GOERLI!,
 			bscTestnet: process.env.APIKEY_CHAPEL!,
 			polygonMumbai: process.env.APIKEY_MUMBAI!,
 			optimisticEthereum: process.env.APIKEY_OP!,
 			blast: process.env.APIKEY_BLAST!,
-			'opbnb-mainnet': process.env.APIKEY_MAINNET!,
+			'opbnb-mainnet': process.env.APIKEY_OPBNB!,
 		},
 		customChains: [
 			{
@@ -258,7 +258,15 @@ const config = {
 					apiURL: 'https://api.blastscan.io/api',
 					browserURL: 'https://blastscan.io'
 				}
-			}
+			},
+			{
+				network: 'opbnb-mainnet',
+				chainId: 204,
+				urls: {
+					apiURL: `https://open-platform.nodereal.io/${process.env.APIKEY_OPBNB!}/op-bnb-mainnet/contract/`,
+					browserURL: 'https://opbnbscan.com/',
+				},
+			},
 		]
 	},
 	paths: {
