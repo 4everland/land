@@ -27,3 +27,4 @@ utils
 contractsInfo.json
 deployments/hardhat
 deployments/localhost
+args.ts

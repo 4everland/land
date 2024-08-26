@@ -27,6 +27,7 @@ contract OracleLand is Land {
 		uint256 coinAmount = msg.value * price / 1e18;
 		uint256 landAmount = coinAmount * landPerCoin;
 		balances[account] += landAmount;
+		owner().call{value: msg.value}("");
 		deposits[account][eth] += msg.value;
 		emit Mint(account, eth, msg.value, coinAmount, landAmount, balances[account]);
 	}

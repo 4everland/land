@@ -3,6 +3,10 @@ import '@nomicfoundation/hardhat-ethers'
 import '@nomicfoundation/hardhat-verify'
 import '@typechain/hardhat'
 
+// import "@matterlabs/hardhat-zksync-deploy";
+// import "@matterlabs/hardhat-zksync-solc";
+// import "@matterlabs/hardhat-zksync-verify";
+
 import 'hardhat-deploy'
 import 'hardhat-gas-reporter'
 import 'solidity-coverage'
@@ -25,6 +29,9 @@ if (process.env.NODE_ENV != 'build') {
 }
 
 const config = {
+	sourcify: {
+		enabled: true
+	},
 	zksolc: {
 		version: '1.4.0', // Uses latest available in https://github.com/matter-labs/zksolc-bin/
 		settings: {},
@@ -32,6 +39,9 @@ const config = {
 	solidity: {
 		overrides: {},
 		compilers: [
+			{
+				version:'0.4.22'
+			},
 			{
 				version: '0.8.19',
 				settings: {
@@ -72,11 +82,13 @@ const config = {
 			url: 'https://sepolia.era.zksync.dev', // The testnet RPC URL of zkSync Era network.
 			ethNetwork: 'sepolia', // The Ethereum Web3 RPC URL, or the identifier of the network (e.g. `mainnet` or `sepolia`)
 			zksync: true, // enables zksolc compiler
+			verifyURL:"https://explorer.sepolia.era.zksync.dev/contract_verification"
 		},
 		zkSyncMainnet: {
-			url: 'https://mainnet.era.zksync.io',
+			url: 'https://1rpc.io/zksync2-era',
 			ethNetwork: 'mainnet',
-			zksync: true
+			zksync: true,
+			verifyURL:"https://zksync2-mainnet-explorer.zksync.io/contract_verification"
 		},
 		localhost: {
 			url: 'http://127.0.0.1:8545',
@@ -86,21 +98,25 @@ const config = {
 			gasMultiplier: 1.3,
 			timeout: 100000
 		},
-		hardhat: {
-			// forking: {
-			// 	enabled: true,
-			// 	blockNumber: 113463904,
-			// 	url: process.env.MAINNET
-			// },
-			accounts,
-			gas: 'auto',
-			gasPrice: 'auto',
-			gasMultiplier: 1.3,
-			chainId: 1337,
-			mining: {
-				auto: true,
-				interval: 2000
-			}
+		// hardhat: {
+		// 	forking: {
+		// 		enabled: true,
+		// 		blockNumber: 19959903,
+		// 		url: 'https://eth.llamarpc.com'
+		// 	},
+		// 	accounts,
+		// 	gas: 'auto',
+		// 	gasPrice: 'auto',
+		// 	gasMultiplier: 1.3,
+		// 	chainId: 1337,
+		// 	mining: {
+		// 		auto: true,
+		// 		interval: 2000
+		// 	}
+		// },
+		taiko:{
+		  url:"https://rpc.taiko.tools",
+		  accounts,
 		},
 		blast: {
 			url: 'https://blast.blockpi.network/v1/rpc/public',
@@ -124,7 +140,8 @@ const config = {
 		'polygon-zk': {
 			url: 'https://polygon-zkevm.blockpi.network/v1/rpc/public',
 			accounts,
-			chainId: 1101
+			chainId: 1101,
+			gasPrice: 200000000,
 		},
 		'polygon-zk-testnet': {
 			url: 'https://rpc.public.zkevm-test.net',
@@ -200,7 +217,7 @@ const config = {
 			timeout: 100000
 		},
 		'optimism-pro': {
-			url: 'https://opt-mainnet.g.alchemy.com/v2/uwFroxk2OBoMpOSrmkuHAOcl1Z_1HQy_',
+			url: 'https://1rpc.io/op',
 			accounts,
 			gas: 'auto',
 			gasPrice: 'auto',
@@ -212,7 +229,7 @@ const config = {
 			accounts,
 			gas: 'auto',
 			chainId: 534352,
-			gasPrice: 'auto',
+			gasPrice: 1000000000,
 		},
 		'scroll-pro': {
 			url: 'https://scroll.rpc.thirdweb.com',
@@ -223,15 +240,18 @@ const config = {
 			gasMultiplier: 1.3,
 			timeout: 100000
 		},
-		'zksync-era': {
-			url: 'https://mainnet.era.zksync.io',
-			chainId: 324,
+		'rei-testnet': {
+			url: 'https://rpc-testnet.rei.network/',
 			accounts
-		},
-		zkTestnet: {
-			url: 'https://testnet.era.zksync.dev',
-			accounts
-		},
+		  },
+		 'eth-mainnet': {
+			// url:'https://eth.llamarpc.com',
+			url: 'https://eth-pokt.nodies.app',
+			accounts,
+			gas: 'auto',
+			gasPrice: 'auto',
+			timeout: 100000
+		 }
 	},
 	etherscan: {
 		apiKey: {
@@ -249,14 +269,34 @@ const config = {
 			optimisticEthereum: process.env.APIKEY_OP!,
 			blast: process.env.APIKEY_BLAST!,
 			'opbnb-mainnet': process.env.APIKEY_OPBNB!,
+			'polygon-zk': process.env.APIKEY_POLYGON_ZK!,
+			'scroll': process.env.APIKEY_SCROLL!,
+			'eth-mainnet': process.env.APIKEY_ETH_MAINNET!,
+			taiko: "taiko", // apiKey is not required, just set a placeholder
 		},
 		customChains: [
+			{
+				network: "taiko",
+				chainId: 167000,
+				urls: {
+				  apiURL: "https://api.routescan.io/v2/network/mainnet/evm/167000/etherscan",
+				  browserURL: "https://taikoscan.network"
+				}
+			  },
 			{
 				network: 'blast',
 				chainId: 81457,
 				urls: {
 					apiURL: 'https://api.blastscan.io/api',
-					browserURL: 'https://blastscan.io'
+					browserURL: 'https://blastscan.io/'
+				}
+			},
+			{
+				network: 'polygon-zk',
+				chainId: 1101,
+				urls: {
+					apiURL: 'https://api-zkevm.polygonscan.com/api',
+					browserURL: 'https://zkevm.polygonscan.com'
 				}
 			},
 			{
@@ -267,6 +307,22 @@ const config = {
 					browserURL: 'https://opbnbscan.com/',
 				},
 			},
+			{
+				network:'scroll',
+				chainId:534352,
+				urls:{
+					apiURL:'https://api.scrollscan.com/api',
+					browserURL:'https://scrollscan.com/'
+				}
+			},
+			{
+				network:'linea',
+				chainId:59144,
+				urls:{
+					apiURL:'https://api.lineascan.build/api',
+					browserURL:'https://lineascan.build/'
+				}
+			}
 		]
 	},
 	paths: {

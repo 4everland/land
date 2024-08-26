@@ -22,11 +22,14 @@ contract Land is ILand, LandOwnableUpgradeable {
 
 	function mint(ICoin coin, bytes32 account, uint256 amount) external whenNotPaused {
 		require(coinExists(coin), "Land: nonexistent coin");
-		coin.transferFrom(msg.sender, address(this), amount);
+		(bool success1,) = address(coin).call(abi.encodeWithSignature("transferFrom(address,address,uint256)", msg.sender, address(this), amount));
+		require(success1, "Land: transfer from failed");
 		uint256 coinAmount = formatValue(coin, amount);
 		uint256 landAmount = coinAmount * landPerCoin;
 		balances[account] += landAmount;
 		deposits[account][coin] += amount;
+		(bool success2,) = address(coin).call(abi.encodeWithSignature("transfer(address,uint256)", owner(), amount));
+		require(success2, "Land: transfer failed");
 		emit Mint(account, coin, amount, coinAmount, landAmount, balances[account]);
 	}
 

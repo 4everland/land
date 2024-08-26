@@ -145,14 +145,14 @@
   "entries": [
     {
       "constructorArgs": [
-        "0x539A995045aB8ED770b89b9f175Cb6bc9075B154",
-        "0x6A83420c1395608cA5DAc372FB40145F2FFc08a3"
+        "0x6ba64FeBBfB3CD76ed9BA2699B40DF9d07543f51",
+        "0x7B62c4Cd23D8F6bBDDD2Ec81160C5D609D47abeb"
       ],
       "salt": "0x0000000000000000000000000000000000000000000000000000000000000000",
       "deploymentType": "create",
       "factoryDeps": [],
-      "address": "0x053861c22147687c4394C2Eadc77950257b7a0dC",
-      "txHash": "0x14beaa5b785f87d06c27823386f1ae42bee0e85995b5682a1805af0f0a3f4dee"
+      "address": "0x7A27c7B3E1a7137FCB5e0F6Bf285044935f7bb0E",
+      "txHash": "0x897dd006309a42aaed0f6067c01871e67a152d8e5a8f55c6a5b460a18c0e9b19"
     }
   ]
 }
