@@ -1,8 +1,8 @@
 .DS_Store
 cache/
+cache-zk/
 artifacts/
 artifacts-zk/
-cache-zk/
 exports/
 deploy/
 deployments/localhost
@@ -22,7 +22,9 @@ yalc.lock
 tasks
 tests
 types
+utils
 
 contractsInfo.json
 deployments/hardhat
 deployments/localhost
+args.ts

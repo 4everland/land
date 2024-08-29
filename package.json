@@ -1,6 +1,6 @@
 {
 	"name": "@4everland/land",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "4ever land contracts for typescript",
 	"main": "./types/index.js",
 	"types": "./types/index.ts",
@@ -16,11 +16,12 @@
 		"solidity"
 	],
 	"devDependencies": {
+		"@matterlabs/hardhat-zksync-verify": "^1.4.2",
 		"@nomicfoundation/hardhat-chai-matchers": "^2.0.1",
 		"@nomicfoundation/hardhat-ethers": "^3.0.2",
 		"@nomicfoundation/hardhat-network-helpers": "^1.0.0",
 		"@nomicfoundation/hardhat-toolbox": "^3.0.0",
-		"@nomicfoundation/hardhat-verify": "^1.0.1",
+		"@nomicfoundation/hardhat-verify": "^1.1.1",
 		"@openzeppelin/contracts": "^4.8.3",
 		"@openzeppelin/contracts-upgradeable": "^4.8.3",
 		"@typechain/ethers-v6": "^0.4.0",
@@ -53,29 +54,20 @@
 		"typescript": "^5.1.6"
 	},
 	"scripts": {
-		"prepublish": "npm run build && tsc ./types/**.ts --moduleResolution nodenext --target ESNext",
+		"prepublish": "npm run build && tsc ./types/**.ts --module nodenext --moduleResolution nodenext --target ESNext",
 		"clean": "hardhat clean",
+		"build:zk:mainnet": "cross-env NODE_ENV=build hardhat compile --network zkSyncMainnet && cross-env NODE_ENV=build hardhat typechain",
 		"build": "cross-env NODE_ENV=build hardhat compile && cross-env NODE_ENV=build hardhat typechain",
 		"console": "hardhat console",
 		"coverage": "cross-env HARDHAT_DEPLOY_FIXTURE=true hardhat coverage",
 		"gas": "cross-env REPORT_GAS=true hardhat test",
 		"dev": "hardhat node",
 		"test": "hardhat test",
+		"rei-testnet:deploy": "hardhat --network rei-testnet deploy",
 		"mumbai:deploy": "hardhat --network mumbai deploy",
 		"dev:deploy": "hardhat --network localhost deploy",
 		"mainnet:deploy": "hardhat --network mainnet deploy",
-		"mainnet:verify": "hardhat --network mainnet etherscan-verify --solc-input",
-		"mainnet:export": "hardhat --network mainnet export --export exports/mainnet.json",
-		"ropsten:deploy": "hardhat --network ropsten deploy",
-		"ropsten:verify": "hardhat --network ropsten etherscan-verify --solc-input",
-		"ropsten:export": "hardhat --network ropsten export --export exports/ropsten.json",
-		"rinkeby:deploy": "hardhat --network rinkeby deploy",
-		"rinkeby:verify": "hardhat --network rinkeby etherscan-verify --solc-input",
-		"rinkeby:export": "hardhat --network rinkeby export --export exports/rinkeby.json",
-		"goerli:deploy": "hardhat --network goerli deploy",
-		"goerli:verify": "hardhat --network goerli etherscan-verify --solc-input",
-		"goerli:export": "hardhat --network goerli export --export exports/goerli.json",
-		"arbitrum:deploy": "hardhat --network arbitrum deploy",
+		"opbnb-mainnet": "hardhat --network opbnb-mainnet",
 		"arbitrum:export": "hardhat --network arbitrum export --export exports/arbitrum.json",
 		"prepare": "yarn build && hardhat typechain",
 		"lint": "eslint \"**/*.{js,ts}\" && solhint contracts/**/*.sol",
@@ -88,9 +80,12 @@
 		}
 	},
 	"dependencies": {
+		"@matterlabs/hardhat-zksync-deploy": "^1.2.1",
+		"@matterlabs/hardhat-zksync-solc": "^1.1.4",
 		"hardhat-ethers": "^1.0.1",
 		"solc-0.8.19": "npm:solc@0.8.19",
 		"solidity-docgen": "0.6.0-beta.35",
-		"ts-node": "^10.9.1"
+		"ts-node": "^10.9.1",
+		"zksync-ethers": "^6.7.1"
 	}
 }

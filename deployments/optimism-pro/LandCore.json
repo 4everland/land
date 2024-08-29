@@ -1,5 +1,5 @@
 {
-  "address": "0xEeEDEF4aDe21065FE254C7cc4a684f4D7E706419",
+  "address": "0xaf80Dfd9c92Be754b6889A31D4923fadc5c7d531",
   "abi": [
     {
       "inputs": [
@@ -46,51 +46,7 @@
           "type": "address"
         }
       ],
-      "name": "NewOwnerAccepted",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "owner",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "pendingOwner",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "deadline",
-          "type": "uint256"
-        }
-      ],
-      "name": "NewOwnerCommitted",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "owner",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "revokedOwner",
-          "type": "address"
-        }
-      ],
-      "name": "NewOwnerRevoked",
+      "name": "NewOwnerTransferred",
       "type": "event"
     },
     {
@@ -104,39 +60,6 @@
       "inputs": [],
       "name": "Unpaused",
       "type": "event"
-    },
-    {
-      "inputs": [],
-      "name": "OWNERSHIP_TRANSFER_DELAY",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "acceptTransferOwnership",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "commitTransferOwnership",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
     },
     {
       "inputs": [],
@@ -166,19 +89,6 @@
     },
     {
       "inputs": [],
-      "name": "ownershipTransferDeadline",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
       "name": "paused",
       "outputs": [
         {
@@ -188,26 +98,6 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "pendingOwner",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "revokeTransferOwnership",
-      "outputs": [],
-      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -235,46 +125,59 @@
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     }
   ],
-  "transactionHash": "0x26550a44e52d20d3bbceb8458ba875500876df18e8f86470c9a425c80d34652b",
+  "transactionHash": "0xfc2cef541c9dd7b97f867ff3f60c3dcce71949a8f6d14b28a415afcf20a67110",
   "receipt": {
     "to": null,
-    "from": "0xe5bab2D79EB833FA25906Cd90540339C9aB8AE70",
-    "contractAddress": "0xEeEDEF4aDe21065FE254C7cc4a684f4D7E706419",
-    "transactionIndex": 5,
-    "gasUsed": "491099",
-    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000080000000000000000000000000080000000000000008000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000100000000000000000000000000",
-    "blockHash": "0x58127970c6270638b1a6ab2147fa03f0ff4d6487874e9486d5b1274bf4adf8c1",
-    "transactionHash": "0x26550a44e52d20d3bbceb8458ba875500876df18e8f86470c9a425c80d34652b",
+    "from": "0x7B62c4Cd23D8F6bBDDD2Ec81160C5D609D47abeb",
+    "contractAddress": "0xaf80Dfd9c92Be754b6889A31D4923fadc5c7d531",
+    "transactionIndex": 9,
+    "gasUsed": "339969",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000200000000000000100000000000000000000000000000000000000000000000000000000000080000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000",
+    "blockHash": "0xae4db83080726954f53ce840f344020a409e1776510ad28135285ab43e7e6746",
+    "transactionHash": "0xfc2cef541c9dd7b97f867ff3f60c3dcce71949a8f6d14b28a415afcf20a67110",
     "logs": [
       {
-        "transactionIndex": 5,
-        "blockNumber": 113684499,
-        "transactionHash": "0x26550a44e52d20d3bbceb8458ba875500876df18e8f86470c9a425c80d34652b",
-        "address": "0xEeEDEF4aDe21065FE254C7cc4a684f4D7E706419",
+        "transactionIndex": 9,
+        "blockNumber": 119871322,
+        "transactionHash": "0xfc2cef541c9dd7b97f867ff3f60c3dcce71949a8f6d14b28a415afcf20a67110",
+        "address": "0xaf80Dfd9c92Be754b6889A31D4923fadc5c7d531",
         "topics": [
           "0xe6c09ffe4572dc9ceaa5ddde4ae41befa655d6fdfe8052077af0970f700e942e"
         ],
-        "data": "0x000000000000000000000000e5bab2d79eb833fa25906cd90540339c9ab8ae70",
-        "logIndex": 38,
-        "blockHash": "0x58127970c6270638b1a6ab2147fa03f0ff4d6487874e9486d5b1274bf4adf8c1"
+        "data": "0x0000000000000000000000007b62c4cd23d8f6bbddd2ec81160c5d609d47abeb",
+        "logIndex": 9,
+        "blockHash": "0xae4db83080726954f53ce840f344020a409e1776510ad28135285ab43e7e6746"
       }
     ],
-    "blockNumber": 113684499,
-    "cumulativeGasUsed": "1501840",
+    "blockNumber": 119871322,
+    "cumulativeGasUsed": "858851",
     "status": 1,
     "byzantium": true
   },
   "args": [
-    "0xe5bab2D79EB833FA25906Cd90540339C9aB8AE70",
-    "0xe5bab2D79EB833FA25906Cd90540339C9aB8AE70"
+    "0xC00bf358413b26a2345dE5256FE9b089b4FAEFD7",
+    "0x7B62c4Cd23D8F6bBDDD2Ec81160C5D609D47abeb"
   ],
   "numDeployments": 1,
-  "solcInputHash": "18f8c04a0d4d0f3890feaf67f19a7cea",
-  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_guardian\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"guardian\",\"type\":\"address\"}],\"name\":\"GuardianSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"NewOwnerAccepted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"pendingOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"NewOwnerCommitted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"revokedOwner\",\"type\":\"address\"}],\"name\":\"NewOwnerRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"OWNERSHIP_TRANSFER_DELAY\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"acceptTransferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"commitTransferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"guardian\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ownershipTransferDeadline\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pendingOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"revokeTransferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_guardian\",\"type\":\"address\"}],\"name\":\"setGuardian\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_paused\",\"type\":\"bool\"}],\"name\":\"setPaused\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/LandCore.sol\":\"LandCore\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"details\":{\"constantOptimizer\":true,\"cse\":true,\"deduplicate\":true,\"inliner\":true,\"jumpdestRemover\":true,\"orderLiterals\":true,\"peephole\":true,\"yul\":false},\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/LandCore.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.8.19;\\n\\nimport \\\"./interfaces/ILandCore.sol\\\";\\n\\ncontract LandCore is ILandCore {\\n\\taddress public owner;\\n\\taddress public pendingOwner;\\n\\tuint256 public ownershipTransferDeadline;\\n\\n\\taddress public guardian;\\n\\n\\tuint256 public constant OWNERSHIP_TRANSFER_DELAY = 86400 * 3;\\n\\n\\tbool public paused;\\n\\n\\tconstructor(address _owner, address _guardian) {\\n\\t\\towner = _owner;\\n\\t\\tguardian = _guardian;\\n\\t\\temit GuardianSet(_guardian);\\n\\t}\\n\\n\\tmodifier onlyOwner() {\\n\\t\\trequire(msg.sender == owner, \\\"Only owner\\\");\\n\\t\\t_;\\n\\t}\\n\\n\\tfunction setGuardian(address _guardian) external onlyOwner {\\n\\t\\tguardian = _guardian;\\n\\t\\temit GuardianSet(_guardian);\\n\\t}\\n\\n\\tfunction setPaused(bool _paused) external {\\n\\t\\trequire((_paused && msg.sender == guardian) || msg.sender == owner, \\\"Unauthorized\\\");\\n\\t\\tpaused = _paused;\\n\\t\\tif (_paused) {\\n\\t\\t\\temit Paused();\\n\\t\\t} else {\\n\\t\\t\\temit Unpaused();\\n\\t\\t}\\n\\t}\\n\\n\\tfunction commitTransferOwnership(address newOwner) external onlyOwner {\\n\\t\\tpendingOwner = newOwner;\\n\\t\\townershipTransferDeadline = block.timestamp + OWNERSHIP_TRANSFER_DELAY;\\n\\n\\t\\temit NewOwnerCommitted(msg.sender, newOwner, block.timestamp + OWNERSHIP_TRANSFER_DELAY);\\n\\t}\\n\\n\\tfunction acceptTransferOwnership() external {\\n\\t\\trequire(msg.sender == pendingOwner, \\\"Only new owner\\\");\\n\\t\\trequire(block.timestamp >= ownershipTransferDeadline, \\\"Deadline not passed\\\");\\n\\n\\t\\temit NewOwnerAccepted(owner, msg.sender);\\n\\n\\t\\towner = pendingOwner;\\n\\t\\tpendingOwner = address(0);\\n\\t\\townershipTransferDeadline = 0;\\n\\t}\\n\\n\\tfunction revokeTransferOwnership() external onlyOwner {\\n\\t\\temit NewOwnerRevoked(msg.sender, pendingOwner);\\n\\n\\t\\tpendingOwner = address(0);\\n\\t\\townershipTransferDeadline = 0;\\n\\t}\\n}\\n\",\"keccak256\":\"0x16755c0d1c93f5ddc4fe448befaf456b6f183064322e9637976bca2a0428914b\",\"license\":\"MIT\"},\"contracts/interfaces/ILandCore.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.8.19;\\n\\ninterface ILandCore {\\n\\tevent GuardianSet(address guardian);\\n\\tevent NewOwnerAccepted(address oldOwner, address owner);\\n\\tevent NewOwnerCommitted(address owner, address pendingOwner, uint256 deadline);\\n\\tevent NewOwnerRevoked(address owner, address revokedOwner);\\n\\tevent Paused();\\n\\tevent Unpaused();\\n\\n\\tfunction acceptTransferOwnership() external;\\n\\n\\tfunction commitTransferOwnership(address newOwner) external;\\n\\n\\tfunction revokeTransferOwnership() external;\\n\\n\\tfunction setGuardian(address _guardian) external;\\n\\n\\tfunction setPaused(bool _paused) external;\\n\\n\\tfunction OWNERSHIP_TRANSFER_DELAY() external view returns (uint256);\\n\\n\\tfunction guardian() external view returns (address);\\n\\n\\tfunction owner() external view returns (address);\\n\\n\\tfunction ownershipTransferDeadline() external view returns (uint256);\\n\\n\\tfunction paused() external view returns (bool);\\n\\n\\tfunction pendingOwner() external view returns (address);\\n}\\n\",\"keccak256\":\"0x0083f364b67daae37039f3f089b8017e0b2352496d00f72d2ca27d205397b54a\",\"license\":\"MIT\"}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b5060405161083b38038061083b83398101604081905261002f916100d3565b600080546001600160a01b038085166001600160a01b03199283161790925560038054928416929091169190911790556040517fe6c09ffe4572dc9ceaa5ddde4ae41befa655d6fdfe8052077af0970f700e942e9061008f90839061011f565b60405180910390a1505061012d565b60006001600160a01b0382165b92915050565b6100ba8161009e565b81146100c557600080fd5b50565b80516100ab816100b1565b600080604083850312156100e9576100e9600080fd5b60006100f585856100c8565b9250506020610106858286016100c8565b9150509250929050565b6101198161009e565b82525050565b602081016100ab8284610110565b6106ff8061013c6000396000f3fe608060405234801561001057600080fd5b50600436106100a95760003560e01c80637433ae7a116100715780637433ae7a1461012b5780637b371107146101355780638a0dac4a1461013d5780638da5cb5b14610150578063e1cebf0b14610163578063e30c39781461017657600080fd5b806315112f11146100ae57806316c38b3c146100cd578063452a9320146100e25780635c975abb146101025780636cd550cd14610123575b600080fd5b6100b760025481565b6040516100c491906104b6565b60405180910390f35b6100e06100db3660046104e4565b610189565b005b6003546100f5906001600160a01b031681565b6040516100c49190610527565b60035461011690600160a01b900460ff1681565b6040516100c4919061053d565b6100e0610255565b6100b76203f48081565b6100e06102db565b6100e061014b36600461055f565b61039a565b6000546100f5906001600160a01b031681565b6100e061017136600461055f565b61041a565b6001546100f5906001600160a01b031681565b8080156101a057506003546001600160a01b031633145b806101b557506000546001600160a01b031633145b6101da5760405162461bcd60e51b81526004016101d1906105a6565b60405180910390fd5b6003805482158015600160a01b0260ff60a01b1990921691909117909155610228576040517f9e87fac88ff661f02d44f95383c817fece4bce600a3dab7a54406878b965e75290600090a150565b6040517fa45f47fdea8a1efdd9029a5691c7f759c32b7c698632b563573e155625d1693390600090a15b50565b6000546001600160a01b0316331461027f5760405162461bcd60e51b81526004016101d1906105d7565b6001546040517fd6176b30539d20b54c946c7ca9dca5950b2f1090fc2bfc55cc77a4025a8a78ae916102bc9133916001600160a01b0316906105e7565b60405180910390a1600180546001600160a01b03191690556000600255565b6001546001600160a01b031633146103055760405162461bcd60e51b81526004016101d19061062e565b6002544210156103275760405162461bcd60e51b81526004016101d190610668565b6000546040517f5cd6b24c0149d980c82592262b3a81294b39f8f6e3c004126aaf0828c787d55491610366916001600160a01b039091169033906105e7565b60405180910390a160018054600080546001600160a01b03199081166001600160a01b038416178255909116909155600255565b6000546001600160a01b031633146103c45760405162461bcd60e51b81526004016101d1906105d7565b600380546001600160a01b0319166001600160a01b0383161790556040517fe6c09ffe4572dc9ceaa5ddde4ae41befa655d6fdfe8052077af0970f700e942e9061040f908390610527565b60405180910390a150565b6000546001600160a01b031633146104445760405162461bcd60e51b81526004016101d1906105d7565b600180546001600160a01b0319166001600160a01b03831617905561046c6203f4804261068e565b6002557f4c743940588d40b308f73f5275a4e608b25c5374f40e4839fb00467e238acfac338261049f6203f4804261068e565b60405161040f939291906106a1565b805b82525050565b602081016104c482846104ae565b92915050565b8015155b811461025257600080fd5b80356104c4816104ca565b6000602082840312156104f9576104f9600080fd5b600061050584846104d9565b949350505050565b60006001600160a01b0382166104c4565b6104b08161050d565b602081016104c4828461051e565b8015156104b0565b602081016104c48284610535565b6104ce8161050d565b80356104c48161054b565b60006020828403121561057457610574600080fd5b60006105058484610554565b600c81526000602082016b155b985d5d1a1bdc9a5e995960a21b815291505b5060200190565b602080825281016104c481610580565b600a81526000602082016927b7363c9037bbb732b960b11b8152915061059f565b602080825281016104c4816105b6565b604081016105f5828561051e565b610602602083018461051e565b9392505050565b600e81526000602082016d27b7363c903732bb9037bbb732b960911b8152915061059f565b602080825281016104c481610609565b6013815260006020820172111958591b1a5b99481b9bdd081c185cdcd959606a1b8152915061059f565b602080825281016104c48161063e565b634e487b7160e01b600052601160045260246000fd5b808201808211156104c4576104c4610678565b606081016106af828661051e565b6106bc602083018561051e565b61050560408301846104ae56fea2646970667358221220c2167007465a6570db73defecdb8fe6ece1a856eb52cd92a3d55ef64a93ff07d64736f6c63430008130033",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100a95760003560e01c80637433ae7a116100715780637433ae7a1461012b5780637b371107146101355780638a0dac4a1461013d5780638da5cb5b14610150578063e1cebf0b14610163578063e30c39781461017657600080fd5b806315112f11146100ae57806316c38b3c146100cd578063452a9320146100e25780635c975abb146101025780636cd550cd14610123575b600080fd5b6100b760025481565b6040516100c491906104b6565b60405180910390f35b6100e06100db3660046104e4565b610189565b005b6003546100f5906001600160a01b031681565b6040516100c49190610527565b60035461011690600160a01b900460ff1681565b6040516100c4919061053d565b6100e0610255565b6100b76203f48081565b6100e06102db565b6100e061014b36600461055f565b61039a565b6000546100f5906001600160a01b031681565b6100e061017136600461055f565b61041a565b6001546100f5906001600160a01b031681565b8080156101a057506003546001600160a01b031633145b806101b557506000546001600160a01b031633145b6101da5760405162461bcd60e51b81526004016101d1906105a6565b60405180910390fd5b6003805482158015600160a01b0260ff60a01b1990921691909117909155610228576040517f9e87fac88ff661f02d44f95383c817fece4bce600a3dab7a54406878b965e75290600090a150565b6040517fa45f47fdea8a1efdd9029a5691c7f759c32b7c698632b563573e155625d1693390600090a15b50565b6000546001600160a01b0316331461027f5760405162461bcd60e51b81526004016101d1906105d7565b6001546040517fd6176b30539d20b54c946c7ca9dca5950b2f1090fc2bfc55cc77a4025a8a78ae916102bc9133916001600160a01b0316906105e7565b60405180910390a1600180546001600160a01b03191690556000600255565b6001546001600160a01b031633146103055760405162461bcd60e51b81526004016101d19061062e565b6002544210156103275760405162461bcd60e51b81526004016101d190610668565b6000546040517f5cd6b24c0149d980c82592262b3a81294b39f8f6e3c004126aaf0828c787d55491610366916001600160a01b039091169033906105e7565b60405180910390a160018054600080546001600160a01b03199081166001600160a01b038416178255909116909155600255565b6000546001600160a01b031633146103c45760405162461bcd60e51b81526004016101d1906105d7565b600380546001600160a01b0319166001600160a01b0383161790556040517fe6c09ffe4572dc9ceaa5ddde4ae41befa655d6fdfe8052077af0970f700e942e9061040f908390610527565b60405180910390a150565b6000546001600160a01b031633146104445760405162461bcd60e51b81526004016101d1906105d7565b600180546001600160a01b0319166001600160a01b03831617905561046c6203f4804261068e565b6002557f4c743940588d40b308f73f5275a4e608b25c5374f40e4839fb00467e238acfac338261049f6203f4804261068e565b60405161040f939291906106a1565b805b82525050565b602081016104c482846104ae565b92915050565b8015155b811461025257600080fd5b80356104c4816104ca565b6000602082840312156104f9576104f9600080fd5b600061050584846104d9565b949350505050565b60006001600160a01b0382166104c4565b6104b08161050d565b602081016104c4828461051e565b8015156104b0565b602081016104c48284610535565b6104ce8161050d565b80356104c48161054b565b60006020828403121561057457610574600080fd5b60006105058484610554565b600c81526000602082016b155b985d5d1a1bdc9a5e995960a21b815291505b5060200190565b602080825281016104c481610580565b600a81526000602082016927b7363c9037bbb732b960b11b8152915061059f565b602080825281016104c4816105b6565b604081016105f5828561051e565b610602602083018461051e565b9392505050565b600e81526000602082016d27b7363c903732bb9037bbb732b960911b8152915061059f565b602080825281016104c481610609565b6013815260006020820172111958591b1a5b99481b9bdd081c185cdcd959606a1b8152915061059f565b602080825281016104c48161063e565b634e487b7160e01b600052601160045260246000fd5b808201808211156104c4576104c4610678565b606081016106af828661051e565b6106bc602083018561051e565b61050560408301846104ae56fea2646970667358221220c2167007465a6570db73defecdb8fe6ece1a856eb52cd92a3d55ef64a93ff07d64736f6c63430008130033",
+  "solcInputHash": "d6e8b3f61ff01846e41d10b07a0f5b94",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_guardian\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"guardian\",\"type\":\"address\"}],\"name\":\"GuardianSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"NewOwnerTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"guardian\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_guardian\",\"type\":\"address\"}],\"name\":\"setGuardian\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_paused\",\"type\":\"bool\"}],\"name\":\"setPaused\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/core/LandCore.sol\":\"LandCore\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"details\":{\"constantOptimizer\":true,\"cse\":true,\"deduplicate\":true,\"inliner\":true,\"jumpdestRemover\":true,\"orderLiterals\":true,\"peephole\":true,\"yul\":false},\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/core/LandCore.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.8.19;\\n\\nimport \\\"../interfaces/ILandCore.sol\\\";\\n\\ncontract LandCore is ILandCore {\\n\\taddress public owner;\\n\\n\\taddress public guardian;\\n\\n\\tbool public paused;\\n\\n\\tconstructor(address _owner, address _guardian) {\\n\\t\\towner = _owner;\\n\\t\\tguardian = _guardian;\\n\\t\\temit GuardianSet(_guardian);\\n\\t}\\n\\n\\tmodifier onlyOwner() {\\n\\t\\trequire(msg.sender == owner, \\\"Only owner\\\");\\n\\t\\t_;\\n\\t}\\n\\n\\tfunction setGuardian(address _guardian) external onlyOwner {\\n\\t\\tguardian = _guardian;\\n\\t\\temit GuardianSet(_guardian);\\n\\t}\\n\\n\\tfunction setPaused(bool _paused) external {\\n\\t\\trequire((_paused && msg.sender == guardian) || msg.sender == owner, \\\"Unauthorized\\\");\\n\\t\\tpaused = _paused;\\n\\t\\tif (_paused) {\\n\\t\\t\\temit Paused();\\n\\t\\t} else {\\n\\t\\t\\temit Unpaused();\\n\\t\\t}\\n\\t}\\n\\n\\tfunction transferOwnership(address newOwner) external onlyOwner {\\n\\t\\towner = newOwner;\\n\\n\\t\\temit NewOwnerTransferred(msg.sender, newOwner);\\n\\t}\\n\\n}\\n\",\"keccak256\":\"0x17f37da1748d6149ccce6726cec7f79bfe12a0fbaa0022be08c19b0da82f103d\",\"license\":\"MIT\"},\"contracts/interfaces/ILandCore.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.8.19;\\n\\ninterface ILandCore {\\n\\tevent GuardianSet(address guardian);\\n\\tevent NewOwnerTransferred(address oldOwner, address owner);\\n\\tevent Paused();\\n\\tevent Unpaused();\\n\\n\\tfunction transferOwnership(address newOwner) external;\\n\\n\\tfunction setGuardian(address _guardian) external;\\n\\n\\tfunction setPaused(bool _paused) external;\\n\\n\\tfunction guardian() external view returns (address);\\n\\n\\tfunction owner() external view returns (address);\\n\\n\\tfunction paused() external view returns (bool);\\n\\n}\\n\",\"keccak256\":\"0x360053b8d1d99adb7a780190188bce982350acf2d65390845fa31d0159812b82\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060405161057f38038061057f83398101604081905261002f916100d3565b600080546001600160a01b038085166001600160a01b03199283161790925560018054928416929091169190911790556040517fe6c09ffe4572dc9ceaa5ddde4ae41befa655d6fdfe8052077af0970f700e942e9061008f90839061011f565b60405180910390a1505061012d565b60006001600160a01b0382165b92915050565b6100ba8161009e565b81146100c557600080fd5b50565b80516100ab816100b1565b600080604083850312156100e9576100e9600080fd5b60006100f585856100c8565b9250506020610106858286016100c8565b9150509250929050565b6101198161009e565b82525050565b602081016100ab8284610110565b6104438061013c6000396000f3fe608060405234801561001057600080fd5b50600436106100625760003560e01c806316c38b3c14610067578063452a93201461007c5780635c975abb146100a55780638a0dac4a146100c65780638da5cb5b146100d9578063f2fde38b146100ec575b600080fd5b61007a6100753660046102e2565b6100ff565b005b60015461008f906001600160a01b031681565b60405161009c919061032b565b60405180910390f35b6001546100b990600160a01b900460ff1681565b60405161009c9190610341565b61007a6100d4366004610363565b6101cb565b60005461008f906001600160a01b031681565b61007a6100fa366004610363565b61024b565b80801561011657506001546001600160a01b031633145b8061012b57506000546001600160a01b031633145b6101505760405162461bcd60e51b8152600401610147906103aa565b60405180910390fd5b6001805482158015600160a01b0260ff60a01b199092169190911790915561019e576040517f9e87fac88ff661f02d44f95383c817fece4bce600a3dab7a54406878b965e75290600090a150565b6040517fa45f47fdea8a1efdd9029a5691c7f759c32b7c698632b563573e155625d1693390600090a15b50565b6000546001600160a01b031633146101f55760405162461bcd60e51b8152600401610147906103db565b600180546001600160a01b0319166001600160a01b0383161790556040517fe6c09ffe4572dc9ceaa5ddde4ae41befa655d6fdfe8052077af0970f700e942e9061024090839061032b565b60405180910390a150565b6000546001600160a01b031633146102755760405162461bcd60e51b8152600401610147906103db565b600080546001600160a01b0319166001600160a01b0383161790556040517f4edd3c99927a5445842ad798b63140c14e08f5dd03affe17eec5c2b7cc3a97a79061024090339084906103eb565b8015155b81146101c857600080fd5b80356102dc816102c2565b92915050565b6000602082840312156102f7576102f7600080fd5b600061030384846102d1565b949350505050565b60006001600160a01b0382166102dc565b6103258161030b565b82525050565b602081016102dc828461031c565b801515610325565b602081016102dc8284610339565b6102c68161030b565b80356102dc8161034f565b60006020828403121561037857610378600080fd5b60006103038484610358565b600c81526000602082016b155b985d5d1a1bdc9a5e995960a21b815291505b5060200190565b602080825281016102dc81610384565b600a81526000602082016927b7363c9037bbb732b960b11b815291506103a3565b602080825281016102dc816103ba565b604081016103f9828561031c565b610406602083018461031c565b939250505056fea2646970667358221220ed441dea659a904d1dfc35d18740391597bfc6ed6bd7a3111fc1820f64f3e07364736f6c63430008130033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100625760003560e01c806316c38b3c14610067578063452a93201461007c5780635c975abb146100a55780638a0dac4a146100c65780638da5cb5b146100d9578063f2fde38b146100ec575b600080fd5b61007a6100753660046102e2565b6100ff565b005b60015461008f906001600160a01b031681565b60405161009c919061032b565b60405180910390f35b6001546100b990600160a01b900460ff1681565b60405161009c9190610341565b61007a6100d4366004610363565b6101cb565b60005461008f906001600160a01b031681565b61007a6100fa366004610363565b61024b565b80801561011657506001546001600160a01b031633145b8061012b57506000546001600160a01b031633145b6101505760405162461bcd60e51b8152600401610147906103aa565b60405180910390fd5b6001805482158015600160a01b0260ff60a01b199092169190911790915561019e576040517f9e87fac88ff661f02d44f95383c817fece4bce600a3dab7a54406878b965e75290600090a150565b6040517fa45f47fdea8a1efdd9029a5691c7f759c32b7c698632b563573e155625d1693390600090a15b50565b6000546001600160a01b031633146101f55760405162461bcd60e51b8152600401610147906103db565b600180546001600160a01b0319166001600160a01b0383161790556040517fe6c09ffe4572dc9ceaa5ddde4ae41befa655d6fdfe8052077af0970f700e942e9061024090839061032b565b60405180910390a150565b6000546001600160a01b031633146102755760405162461bcd60e51b8152600401610147906103db565b600080546001600160a01b0319166001600160a01b0383161790556040517f4edd3c99927a5445842ad798b63140c14e08f5dd03affe17eec5c2b7cc3a97a79061024090339084906103eb565b8015155b81146101c857600080fd5b80356102dc816102c2565b92915050565b6000602082840312156102f7576102f7600080fd5b600061030384846102d1565b949350505050565b60006001600160a01b0382166102dc565b6103258161030b565b82525050565b602081016102dc828461031c565b801515610325565b602081016102dc8284610339565b6102c68161030b565b80356102dc8161034f565b60006020828403121561037857610378600080fd5b60006103038484610358565b600c81526000602082016b155b985d5d1a1bdc9a5e995960a21b815291505b5060200190565b602080825281016102dc81610384565b600a81526000602082016927b7363c9037bbb732b960b11b815291506103a3565b602080825281016102dc816103ba565b604081016103f9828561031c565b610406602083018461031c565b939250505056fea2646970667358221220ed441dea659a904d1dfc35d18740391597bfc6ed6bd7a3111fc1820f64f3e07364736f6c63430008130033",
   "devdoc": {
     "kind": "dev",
     "methods": {},
@@ -288,43 +191,27 @@
   "storageLayout": {
     "storage": [
       {
-        "astId": 5467,
-        "contract": "contracts/LandCore.sol:LandCore",
+        "astId": 5427,
+        "contract": "contracts/core/LandCore.sol:LandCore",
         "label": "owner",
         "offset": 0,
         "slot": "0",
         "type": "t_address"
       },
       {
-        "astId": 5469,
-        "contract": "contracts/LandCore.sol:LandCore",
-        "label": "pendingOwner",
+        "astId": 5429,
+        "contract": "contracts/core/LandCore.sol:LandCore",
+        "label": "guardian",
         "offset": 0,
         "slot": "1",
         "type": "t_address"
       },
       {
-        "astId": 5471,
-        "contract": "contracts/LandCore.sol:LandCore",
-        "label": "ownershipTransferDeadline",
-        "offset": 0,
-        "slot": "2",
-        "type": "t_uint256"
-      },
-      {
-        "astId": 5473,
-        "contract": "contracts/LandCore.sol:LandCore",
-        "label": "guardian",
-        "offset": 0,
-        "slot": "3",
-        "type": "t_address"
-      },
-      {
-        "astId": 5480,
-        "contract": "contracts/LandCore.sol:LandCore",
+        "astId": 5431,
+        "contract": "contracts/core/LandCore.sol:LandCore",
         "label": "paused",
         "offset": 20,
-        "slot": "3",
+        "slot": "1",
         "type": "t_bool"
       }
     ],
@@ -338,11 +225,6 @@
         "encoding": "inplace",
         "label": "bool",
         "numberOfBytes": "1"
-      },
-      "t_uint256": {
-        "encoding": "inplace",
-        "label": "uint256",
-        "numberOfBytes": "32"
       }
     }
   }

@@ -3,11 +3,17 @@ import '@nomicfoundation/hardhat-ethers'
 import '@nomicfoundation/hardhat-verify'
 import '@typechain/hardhat'
 
+// import "@matterlabs/hardhat-zksync-deploy";
+// import "@matterlabs/hardhat-zksync-solc";
+// import "@matterlabs/hardhat-zksync-verify";
+
 import 'hardhat-deploy'
 import 'hardhat-gas-reporter'
 import 'solidity-coverage'
 import 'hardhat-storage-layout'
 import 'solidity-docgen'
+import '@matterlabs/hardhat-zksync-solc'
+import '@matterlabs/hardhat-zksync-deploy'
 
 import { config as dotenvConfig } from 'dotenv'
 import { resolve } from 'path'
@@ -23,9 +29,19 @@ if (process.env.NODE_ENV != 'build') {
 }
 
 const config = {
+	sourcify: {
+		enabled: true
+	},
+	zksolc: {
+		version: '1.4.0', // Uses latest available in https://github.com/matter-labs/zksolc-bin/
+		settings: {},
+	},
 	solidity: {
 		overrides: {},
 		compilers: [
+			{
+				version:'0.4.22'
+			},
 			{
 				version: '0.8.19',
 				settings: {
@@ -53,10 +69,26 @@ const config = {
 		mainnet: {
 			url: process.env.MAINNET,
 			accounts,
-			gas:'auto',
-			gasPrice:'auto',
+			gas: 'auto',
+			gasPrice: 'auto',
 			gasMultiplier: 1.3,
 			timeout: 100000
+		},
+		sepolia: {
+			url: 'https://eth-sepolia.g.alchemy.com/v2/BozCNsg-XYuj_WXWdMcHHinrOSC7jQRI',  // The Ethereum Web3 RPC URL (optional).
+			zksync: false, // disables zksolc compiler
+		},
+		zkSyncTestnet: {
+			url: 'https://sepolia.era.zksync.dev', // The testnet RPC URL of zkSync Era network.
+			ethNetwork: 'sepolia', // The Ethereum Web3 RPC URL, or the identifier of the network (e.g. `mainnet` or `sepolia`)
+			zksync: true, // enables zksolc compiler
+			verifyURL:"https://explorer.sepolia.era.zksync.dev/contract_verification"
+		},
+		zkSyncMainnet: {
+			url: 'https://1rpc.io/zksync2-era',
+			ethNetwork: 'mainnet',
+			zksync: true,
+			verifyURL:"https://zksync2-mainnet-explorer.zksync.io/contract_verification"
 		},
 		localhost: {
 			url: 'http://127.0.0.1:8545',
@@ -66,21 +98,29 @@ const config = {
 			gasMultiplier: 1.3,
 			timeout: 100000
 		},
-		hardhat: {
-			// forking: {
-			// 	enabled: true,
-			// 	blockNumber: 113463904,
-			// 	url: process.env.MAINNET
-			// },
-			accounts,
-			gas: 'auto',
-			gasPrice: 'auto',
-			gasMultiplier: 1.3,
-			chainId: 1337,
-			mining: {
-				auto: true,
-				interval: 2000
-			}
+		// hardhat: {
+		// 	forking: {
+		// 		enabled: true,
+		// 		blockNumber: 19959903,
+		// 		url: 'https://eth.llamarpc.com'
+		// 	},
+		// 	accounts,
+		// 	gas: 'auto',
+		// 	gasPrice: 'auto',
+		// 	gasMultiplier: 1.3,
+		// 	chainId: 1337,
+		// 	mining: {
+		// 		auto: true,
+		// 		interval: 2000
+		// 	}
+		// },
+		taiko:{
+		  url:"https://rpc.taiko.tools",
+		  accounts,
+		},
+		blast: {
+			url: 'https://blast.blockpi.network/v1/rpc/public',
+			accounts
 		},
 		'arbitrum-nova': {
 			url: 'https://arbitrum-nova.publicnode.com',
@@ -100,7 +140,8 @@ const config = {
 		'polygon-zk': {
 			url: 'https://polygon-zkevm.blockpi.network/v1/rpc/public',
 			accounts,
-			chainId: 1101
+			chainId: 1101,
+			gasPrice: 200000000,
 		},
 		'polygon-zk-testnet': {
 			url: 'https://rpc.public.zkevm-test.net',
@@ -113,7 +154,7 @@ const config = {
 			chainId: 5611,
 		},
 		'opbnb-mainnet': {
-			url: 'https://opbnb-mainnet-rpc.bnbchain.org',
+			url: 'https://opbnb-rpc.publicnode.com',
 			accounts,
 			chainId: 204,
 		},
@@ -151,15 +192,6 @@ const config = {
 			gasMultiplier: 1.3,
 			timeout: 100000
 		},
-		sepolia: {
-			url:'https://endpoints.omniatech.io/v1/eth/sepolia/public',
-			accounts,
-			chainId: 11155111,
-			gas: 'auto',
-			gasPrice: 'auto',
-			gasMultiplier: 1.3,
-			timeout: 100000
-		},
 		polygon: {
 			url: 'https://polygon-bor.publicnode.com',
 			accounts,
@@ -185,7 +217,7 @@ const config = {
 			timeout: 100000
 		},
 		'optimism-pro': {
-			url: 'https://opt-mainnet.g.alchemy.com/v2/uwFroxk2OBoMpOSrmkuHAOcl1Z_1HQy_',
+			url: 'https://1rpc.io/op',
 			accounts,
 			gas: 'auto',
 			gasPrice: 'auto',
@@ -197,9 +229,7 @@ const config = {
 			accounts,
 			gas: 'auto',
 			chainId: 534352,
-			gasPrice: 'auto',
-			gasMultiplier: 1.3,
-			timeout: 100000
+			gasPrice: 1000000000,
 		},
 		'scroll-pro': {
 			url: 'https://scroll.rpc.thirdweb.com',
@@ -210,15 +240,18 @@ const config = {
 			gasMultiplier: 1.3,
 			timeout: 100000
 		},
-		'zksync-era': {
-			url: 'https://mainnet.era.zksync.io',
-			chainId: 324,
+		'rei-testnet': {
+			url: 'https://rpc-testnet.rei.network/',
 			accounts
-		},
-		blast: {
-			url: 'https://blastl2-mainnet.public.blastapi.io/',
-			accounts
-		}
+		  },
+		 'eth-mainnet': {
+			// url:'https://eth.llamarpc.com',
+			url: 'https://eth-pokt.nodies.app',
+			accounts,
+			gas: 'auto',
+			gasPrice: 'auto',
+			timeout: 100000
+		 }
 	},
 	etherscan: {
 		apiKey: {
@@ -228,13 +261,69 @@ const config = {
 			arbitrumNova: process.env.APIKEY_ARBNOVA!,
 			linea: process.env.APIKEY_LINEA,
 			sepolia: process.env.APIKEY_MAINNET!,
-			bsc:  process.env.APIKEY_BSC!,
+			bsc: process.env.APIKEY_BSC!,
 			polygon: process.env.APIKEY_POLYGON!,
 			goerli: process.env.APIKEY_GOERLI!,
 			bscTestnet: process.env.APIKEY_CHAPEL!,
 			polygonMumbai: process.env.APIKEY_MUMBAI!,
 			optimisticEthereum: process.env.APIKEY_OP!,
-		}
+			blast: process.env.APIKEY_BLAST!,
+			'opbnb-mainnet': process.env.APIKEY_OPBNB!,
+			'polygon-zk': process.env.APIKEY_POLYGON_ZK!,
+			'scroll': process.env.APIKEY_SCROLL!,
+			'eth-mainnet': process.env.APIKEY_ETH_MAINNET!,
+			taiko: "taiko", // apiKey is not required, just set a placeholder
+		},
+		customChains: [
+			{
+				network: "taiko",
+				chainId: 167000,
+				urls: {
+				  apiURL: "https://api.routescan.io/v2/network/mainnet/evm/167000/etherscan",
+				  browserURL: "https://taikoscan.network"
+				}
+			  },
+			{
+				network: 'blast',
+				chainId: 81457,
+				urls: {
+					apiURL: 'https://api.blastscan.io/api',
+					browserURL: 'https://blastscan.io/'
+				}
+			},
+			{
+				network: 'polygon-zk',
+				chainId: 1101,
+				urls: {
+					apiURL: 'https://api-zkevm.polygonscan.com/api',
+					browserURL: 'https://zkevm.polygonscan.com'
+				}
+			},
+			{
+				network: 'opbnb-mainnet',
+				chainId: 204,
+				urls: {
+					apiURL: `https://open-platform.nodereal.io/${process.env.APIKEY_OPBNB!}/op-bnb-mainnet/contract/`,
+					browserURL: 'https://opbnbscan.com/',
+				},
+			},
+			{
+				network:'scroll',
+				chainId:534352,
+				urls:{
+					apiURL:'https://api.scrollscan.com/api',
+					browserURL:'https://scrollscan.com/'
+				}
+			},
+			{
+				network:'linea',
+				chainId:59144,
+				urls:{
+					apiURL:'https://api.lineascan.build/api',
+					browserURL:'https://lineascan.build/'
+				}
+			}
+		]
 	},
 	paths: {
 		deploy: 'deploy',
