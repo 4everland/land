@@ -20,6 +20,7 @@ contract BlastOracleLand is OracleLand {
 		USDB = _USDB;
 		_addCoin(ICoin(address(_USDB)));
 		blast.configureClaimableYield();
+		blast.configureClaimableGas();
 		USDB.configure(YieldMode.CLAIMABLE);
 	}
 
