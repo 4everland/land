@@ -37,11 +37,16 @@ const config = {
 		settings: {},
 	},
 	solidity: {
-		overrides: {},
 		compilers: [
 			{
-				version:'0.4.22'
-			},
+				version: '0.4.22',
+				settings: {
+				  optimizer: {
+						enabled: true,
+						runs: 200,
+				  },
+				},
+			  },
 			{
 				version: '0.8.19',
 				settings: {
@@ -58,7 +63,15 @@ const config = {
 						},
 					},
 				},
-			}
+			},		{
+				version: '0.7.6',
+				settings: {
+				  optimizer: {
+						enabled: true,
+						runs: 200,
+				  },
+				},
+			  },
 		],
 	},
 	namedAccounts: {
@@ -82,13 +95,13 @@ const config = {
 			url: 'https://sepolia.era.zksync.dev', // The testnet RPC URL of zkSync Era network.
 			ethNetwork: 'sepolia', // The Ethereum Web3 RPC URL, or the identifier of the network (e.g. `mainnet` or `sepolia`)
 			zksync: true, // enables zksolc compiler
-			verifyURL:"https://explorer.sepolia.era.zksync.dev/contract_verification"
+			verifyURL:'https://explorer.sepolia.era.zksync.dev/contract_verification'
 		},
 		zkSyncMainnet: {
 			url: 'https://1rpc.io/zksync2-era',
 			ethNetwork: 'mainnet',
 			zksync: true,
-			verifyURL:"https://zksync2-mainnet-explorer.zksync.io/contract_verification"
+			verifyURL:'https://zksync2-mainnet-explorer.zksync.io/contract_verification'
 		},
 		localhost: {
 			url: 'http://127.0.0.1:8545',
@@ -99,11 +112,15 @@ const config = {
 			timeout: 100000
 		},
 		// hardhat: {
-		// 	forking: {
-		// 		enabled: true,
-		// 		blockNumber: 19959903,
-		// 		url: 'https://eth.llamarpc.com'
-		// 	},
+		// forking: {
+		// 	enabled: true,
+		// 	blockNumber: 21865100,
+		// 	url: 'https://rpc.ankr.com/eth',
+		// 	batchSize: 1,
+		// },
+		// accounts:{
+		// 	count:2
+		// }
 		// 	accounts,
 		// 	gas: 'auto',
 		// 	gasPrice: 'auto',
@@ -115,7 +132,7 @@ const config = {
 		// 	}
 		// },
 		taiko:{
-		  url:"https://rpc.taiko.tools",
+		  url:'https://rpc.taiko.tools',
 		  accounts,
 		},
 		blast: {
@@ -246,7 +263,8 @@ const config = {
 		  },
 		 'eth-mainnet': {
 			// url:'https://eth.llamarpc.com',
-			url: 'https://eth-pokt.nodies.app',
+			// url: 'https://eth-pokt.nodies.app',
+			url:'https://rpc.ankr.com/eth',
 			accounts,
 			gas: 'auto',
 			gasPrice: 'auto',
@@ -272,15 +290,15 @@ const config = {
 			'polygon-zk': process.env.APIKEY_POLYGON_ZK!,
 			'scroll': process.env.APIKEY_SCROLL!,
 			'eth-mainnet': process.env.APIKEY_ETH_MAINNET!,
-			taiko: "taiko", // apiKey is not required, just set a placeholder
+			taiko: 'taiko', // apiKey is not required, just set a placeholder
 		},
 		customChains: [
 			{
-				network: "taiko",
+				network: 'taiko',
 				chainId: 167000,
 				urls: {
-				  apiURL: "https://api.routescan.io/v2/network/mainnet/evm/167000/etherscan",
-				  browserURL: "https://taikoscan.network"
+				  apiURL: 'https://api.routescan.io/v2/network/mainnet/evm/167000/etherscan',
+				  browserURL: 'https://taikoscan.network'
 				}
 			  },
 			{
