@@ -28,3 +28,4 @@ contractsInfo.json
 deployments/hardhat
 deployments/localhost
 args.ts
+scripts/

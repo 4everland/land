@@ -22,7 +22,8 @@
 		"./deploy",
 		"tests",
 		"./tasks",
-		"./types"
+		"./types",
+		"./scripts"
 	],
 	"exclude": [
 		"node_modules"
